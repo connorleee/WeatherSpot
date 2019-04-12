@@ -1,6 +1,6 @@
 function displayWeather() {
     var APIKey = "78c022ae7b87430bbaabb56f3fd651a0";
-    var cityName;
+    var cityName = "";
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + APIKey;
 
     $.ajax({
@@ -15,4 +15,4 @@ function displayWeather() {
 }
 
 //Adding a click event listener to search button
-$(document).on("click")
+$(document).on("click", ".submit", displayWeather);
