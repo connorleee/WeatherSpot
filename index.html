@@ -6,14 +6,17 @@
     <meta http-equiv='X-UA-Compatible' content='ie=edge'>
     <!-- Bootstrap Stylesheet -->
     <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'>
+    <!-- fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Fjalla+One|Oswald' rel='stylesheet'>
     <!-- Main stylesheet -->
     <link rel='stylesheet' href='assets/css/style.css'>
     <!-- Tab Title -->
     <title>Weather Spot App</title>
     <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src='https://code.jquery.com/jquery-3.3.1.js'></script>
 </head>
 <body>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -28,11 +31,21 @@
 =======
 
 >>>>>>> 971f44d5475baf5484dc50c0cde83f143c0336a8
+=======
+    <div class='container userLocation'>
+        <div class='row'>
+            
+        </div>
+    </div>
+    <div>
+        <img src='assets/images/background.jpg' alt='background' id='background'>
+    </div>
+>>>>>>> 03b5eece3ac17a7cca9ea656194a82d5ed8e850a
     <div class='container-fluid'>
         <div class='row'>
             <h1 class='col' id='currentLocationTitle'>Current Location: <span id='currentLocation'></span></h1>
             <div class='embed-container' id='spotifyApp'>
-                <iframe src="https://open.spotify.com/embed/track/0mUyMawtxj1CJ76kn9gIZK" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media" id='spotify'></iframe>
+                <iframe src='https://open.spotify.com/embed/track/0mUyMawtxj1CJ76kn9gIZK' width='300' height='80' frameborder='0' allowtransparency='true' allow='encrypted-media' id='spotify'></iframe>
             </div>
         </div>
         <div class='row appHeaderLeft'>
@@ -43,22 +56,24 @@
         <div id='rightColumn'>
             <div class="col-auto">
                 <i class="fas fa-search h4 text-body"></i>
-                <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Find Location">
-                <button class="btn btn-sm btn-success" type="submit">Search</button>
+                <p>Allow this page to use your location <input type="checkbox" onclick="getLocation()"></p>
+                <input class="form-control form-control-lg form-control-borderless location" type="search" placeholder="Find Location">
+                <button class="btn btn-sm btn-success submit" type="submit">Search</button>
             </div>
         </div>
     </div>
     <div class='container'>
+        <p id="display"></p>
         <div class='weatherMain'>
 
         </div>
     </div>
     
-    <footer class='footer'>
-        <div class="container">
+    <div class='footer'>
+        <div class='container weatherDetails'>
             Footer
         </div>
-    </footer>
+    </div>
     <script link='assets/javascript/spotify.js'></script>
     <script link='assets/javascript/weather.js'></script>
     <script link='assets/javascript/logic.js'></script>
