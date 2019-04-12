@@ -4,16 +4,22 @@
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <!-- Bootstrap Stylesheet -->
     <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'>
+    <!-- Main stylesheet -->
     <link rel='stylesheet' href='assets/css/style.css'>
+    <!-- Tab Title -->
     <title>Weather Spot App</title>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 </head>
 <body>
+
     <div class='container-fluid'>
         <div class='row'>
             <h1 class='col' id='currentLocationTitle'>Current Location: <span id='currentLocation'></span></h1>
             <div class='embed-container' id='spotifyApp'>
-                <iframe src="https://open.spotify.com/embed/track/0mUyMawtxj1CJ76kn9gIZK" width="420" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media" id='spotify'></iframe>
+                <iframe src="https://open.spotify.com/embed/track/0mUyMawtxj1CJ76kn9gIZK" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media" id='spotify'></iframe>
             </div>
         </div>
         <div class='row appHeaderLeft'>
@@ -29,6 +35,17 @@
             </div>
         </div>
     </div>
+    <div class='container'>
+        <div class='weatherMain'>
+
+        </div>
+    </div>
+    
+    <footer class='footer'>
+        <div class="container">
+            Footer
+        </div>
+    </footer>
     <script link='assets/javascript/spotify.js'></script>
     <script link='assets/javascript/weather.js'></script>
     <script link='assets/javascript/logic.js'></script>
