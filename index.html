@@ -30,12 +30,14 @@
         <div id='rightColumn'>
             <div class="col-auto">
                 <i class="fas fa-search h4 text-body"></i>
-                <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Find Location">
-                <button class="btn btn-sm btn-success" type="submit">Search</button>
+                <p>Allow this page to use your location <input type="checkbox" onclick="getLocation()"></p>
+                <input class="form-control form-control-lg form-control-borderless location" type="search" placeholder="Find Location">
+                <button class="btn btn-sm btn-success submit" type="submit">Search</button>
             </div>
         </div>
     </div>
     <div class='container'>
+        <p id="display"></p>
         <div class='weatherMain'>
 
         </div>
