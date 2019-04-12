@@ -5,24 +5,28 @@
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <meta http-equiv='X-UA-Compatible' content='ie=edge'>
     <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'>
-    <link rel='stylesheet' href='assets/style.css'>
+    <link rel='stylesheet' href='assets/css/style.css'>
     <title>Weather Spot App</title>
 </head>
 <body>
     <div class='container-fluid'>
         <div class='row'>
-            <h1 class='col-md' id='currentLocationTitle'>Current Location: <span id='currentLocation'></span></h1>
+            <h1 class='col' id='currentLocationTitle'>Current Location: <span id='currentLocation'></span></h1>
             <div class='embed-container' id='spotifyApp'>
-                <iframe src="https://open.spotify.com/embed/album/1DFixLWuPkv3KT3TnV35m3" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-            </div>
-            <div class='col-md-3 align-right'>
-                <div class="container">
-                    container 
-                </div>
+                <iframe src="https://open.spotify.com/embed/track/0mUyMawtxj1CJ76kn9gIZK" width="420" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media" id='spotify'></iframe>
             </div>
         </div>
-        <div class='row'>
-            <h2 class='col-md' id='appHeader'>Weather Spot Logo</h2>
+        <div class='row appHeaderLeft'>
+            <h2 class='col' id='appHeader'>Weather Spot Logo</h2>
+        </div>
+    </div>
+    <div class='container-fluid'>
+        <div id='rightColumn'>
+            <div class="col-auto">
+                <i class="fas fa-search h4 text-body"></i>
+                <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Find Location">
+                <button class="btn btn-sm btn-success" type="submit">Search</button>
+            </div>
         </div>
     </div>
     <script link='assets/javascript/spotify.js'></script>
