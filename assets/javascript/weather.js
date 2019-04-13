@@ -147,3 +147,11 @@ function displayWeatherByCity() {
 
 //Adding a click event listener to search button
 $(document).on("click", ".submit", displayWeatherByCity);
+
+
+ 
+//$(".mainWeatherCard").append(humidity);
+//$('#temperatureDiv').append(temperature);
+//$('#windSpeedDiv').append(wind);
+
+//$('#currentLocation').append(city);
