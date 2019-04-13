@@ -14,6 +14,9 @@
     <title>Weather Spot App</title>
     <!-- jQuery -->
     <script src='https://code.jquery.com/jquery-3.3.1.js'></script>
+
+    <!-- Moment js Reference-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 </head>
 <body>
     <div class='container userLocation'>
@@ -39,7 +42,7 @@
         <div id='rightColumn'>
             <div class="col-auto">
                 <i class="fas fa-search h4 text-body"></i>
-                <p>Allow this page to use your location <input type="checkbox" onclick="getLocation()"></p>
+                <p>Allow this page to use your location <input type="checkbox"></p>
                 <input class="form-control form-control-lg form-control-borderless location" type="search" placeholder="Find Location">
                 <button class="btn btn-sm btn-success submit" type="submit">Search</button>
             </div>
@@ -48,6 +51,7 @@
     <div class='container'>
         <p id="display"></p>
         <div class='weatherMain'>
+            <p>Test</p>
 
         </div>
     </div>
@@ -59,6 +63,6 @@
     </div>
     <script src='assets/javascript/spotify.js'></script>
     <script src='assets/javascript/weather.js'></script>
-    <script src='assets/javascript/logic.js'></script>
+    <!-- <script src='assets/javascript/logic.js'></script> -->
 </body>
 </html>
