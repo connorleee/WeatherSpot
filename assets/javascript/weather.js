@@ -64,7 +64,7 @@ function displayWeatherData(weather) {
 
     //put city name and country into html
     $("#currentLocation").html(cityAndCountry);
-
+   
 
     //retrieve weather icon
     var weatherIconID = weather.weather[0].icon;
@@ -77,56 +77,66 @@ function displayWeatherData(weather) {
     //retrieve temperature
     var currentTemp = weather.main.temp;
     console.log(currentTemp);
-    var pCurrentTemp = $("<p>").text(currentTemp + " Fahrenheit");
+    var currentTempRound = Math.round(currentTemp);
+    console.log(currentTempRound);
+    var pCurrentTemp = currentTempRound + " Fahrenheit";
 
 
 
-    //retrieve main weather conditio
+    //retrieve main weather condition
     var weatherMain = weather.weather[0].main;
     console.log(weatherMain);
-    var pWeatherMain = $("<p>").text(weatherMain);
+    var pWeatherMain = weatherMain;
 
 
     //Show current time and data
     var currentTime = moment().format("MMM Do YYYY, hh:mm A")
     console.log(currentTime);
-    var pCurrentTime = $("<p>").text(currentTime);
+    var pCurrentTime = currentTime;
+
+    //retrieve wind speed data
+    var windSpeed = weather.wind.speed;
+    console.log(windSpeed);
+    var windSpeedRound = Math.round(windSpeed);
+    console.log(windSpeedRound);
+    var pWindSpeed = "Wind speed: " + windSpeedRound + " meter/sec"
+
 
 
     //retrieve clouds data
-    var cloudiness = weather.clouds.all;
-    console.log(cloudiness);
-    var pCloudiness = $("<p>").text("Cloudiness: " + cloudiness + "%");
+    //var cloudiness = weather.clouds.all;
+    //console.log(cloudiness);
+    //var pCloudiness = $("<p>").text("Cloudiness: " + cloudiness + "%");
 
     //retrieve humudity
     var humidity = weather.main.humidity;
     console.log(humidity);
-    var pHumidity = $("<p>").text("Humidity: " + humidity + "%");
+    var humidityRound = Math.round(humidity);
+    console.log(humidityRound);
+    var pHumidity = "Humidity: " + humidityRound + "%";
 
     //retrieve sunrise data
     var sunrise = weather.sys.sunrise;
-    var sunrisePrettify = moment(sunrise, "X").format("HH:mm");
+    var sunrisePrettify = moment(sunrise, "X").format("hh:mm A");
     console.log(sunrisePrettify);
-    var pSunrise = $("<p>").text("Sunrise: " + sunrisePrettify);
+    var pSunrise = "Sunrise: " + sunrisePrettify;
 
     //retrieve sunset data
     var sunset = weather.sys.sunset;
-    var sunsetPrettify = moment(sunset, "X").format("HH:mm");
+    var sunsetPrettify = moment(sunset, "X").format("hh:mm A");
     console.log(sunsetPrettify);
-    var pSunset = $("<p>").text("Sunset: " + sunsetPrettify);
+    var pSunset = "Sunset: " + sunsetPrettify;
 
     //Put the above weather data into html
-    $(".weatherMain").empty().append(
-        weatherIconImage,
-        pCurrentTime,
-        pWeatherMain,
-        pCurrentTemp,
-        pCloudiness,
-        pHumidity,
-        pSunrise,
-        pSunset
+    $("#temperatureDiv").text(pCurrentTemp);
+    $("#descriptionDiv").text(pWeatherMain);
+    $("#windSpeedDiv").text(pWindSpeed);
+    $("#humidityDiv").text(pHumidity);
+    $("#sunriseDiv").text(pSunrise);
+    $("#sunsetDiv").text(pSunset);
+    $("#weatherIcon").html(weatherIconImage);
+    $("#currentDateTime").text(pCurrentTime)
 
-    )
 }
 
 //If user doesn't check "Allow this page to use your location checkbox"， user needs to input the city name or zip code(doesn't allow to submit empty form)
