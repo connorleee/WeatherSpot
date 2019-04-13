@@ -1,17 +1,4 @@
 
-
-var longLat = document.getElementById("display");
-$('.mainWeatherCard').hide();
-
-function getLocation() {
-  $('#currentLocation').empty();
-  $('.mainWeatherCard').hide();
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  } else { 
-    longLat.innerHTML = "Geolocation is not supported by this browser.";
-  }
-}
 var makeItRain = function() {
   //clear out everything
   $('.rain').empty();
@@ -44,6 +31,7 @@ $('.splat-toggle.toggle').on('click', function() {
 });
 
 makeItRain();
+<<<<<<< HEAD
 function showPosition(position) {
     $('.weatherMain').empty();
     $('.mainWeatherCard').show();
@@ -115,3 +103,5 @@ var APIKey = "2beabda251abb98dae56b0873a993af5";
 };
 // Adding a click event listener to all elements with a class of "animal-btn"
 $(document).on("click", ".submit", displayLocation);
+=======
+>>>>>>> 24c3ed85faa7da20c9a9f191f8da078e53d657dd
