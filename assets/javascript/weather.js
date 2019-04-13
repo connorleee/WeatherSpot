@@ -134,6 +134,7 @@ function displayWeatherData(weather) {
     $("#humidityDiv").text(pHumidity);
     $("#sunriseDiv").text(pSunrise);
     $("#sunsetDiv").text(pSunset);
+    $("#weatherIcon").html(weatherIconImage);
 
 }
 
