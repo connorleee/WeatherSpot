@@ -92,11 +92,16 @@ function displayWeatherData(weather) {
     console.log(currentTime);
     var pCurrentTime = $("<p>").text(currentTime);
 
+    //retrieve wind speed data
+    var windSpeed = weather.wind.speed;
+    console.log(windSpeed);
+
+
 
     //retrieve clouds data
-    var cloudiness = weather.clouds.all;
-    console.log(cloudiness);
-    var pCloudiness = $("<p>").text("Cloudiness: " + cloudiness + "%");
+    //var cloudiness = weather.clouds.all;
+    //console.log(cloudiness);
+    //var pCloudiness = $("<p>").text("Cloudiness: " + cloudiness + "%");
 
     //retrieve humudity
     var humidity = weather.main.humidity;
@@ -121,7 +126,6 @@ function displayWeatherData(weather) {
         pCurrentTime,
         pWeatherMain,
         pCurrentTemp,
-        pCloudiness,
         pHumidity,
         pSunrise,
         pSunset
