@@ -70,9 +70,11 @@ function showPosition(position) {
       var humidity = $("<div>").text("Humidity: " + response.main.humidity);
       var temperature = $("<div>").text("Temperature (F) " + response.main.temp);
       
-    $(".weatherMain").append(wind, humidity, temperature);
-    $('#currentLocation').append(city);
-
+      $(".mainWeatherCard").append(humidity);
+      $('#temperatureDiv').append(temperature);
+      $('#windSpeedDiv').append(wind);
+      
+      $('#currentLocation').append(city);
     });
 };
 
@@ -104,7 +106,10 @@ var APIKey = "2beabda251abb98dae56b0873a993af5";
         var humidity = $("<div>").text("Humidity: " + response.main.humidity);
         var temperature = $("<div>").text("Temperature (F) " + response.main.temp);
 
-        $(".weatherMain").append(wind, humidity, temperature);
+        $(".mainWeatherCard").append(humidity);
+        $('#temperatureDiv').append(temperature);
+        $('#windSpeedDiv').append(wind);
+        
         $('#currentLocation').append(city);
       });
 };
