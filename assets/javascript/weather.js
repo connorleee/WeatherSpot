@@ -92,14 +92,14 @@ function displayWeatherData(weather) {
     //Show current time and data
     var currentTime = moment().format("MMM Do YYYY, hh:mm A")
     console.log(currentTime);
-    var pCurrentTime = $("<p>").text(currentTime);
+    var pCurrentTime = currentTime;
 
     //retrieve wind speed data
     var windSpeed = weather.wind.speed;
     console.log(windSpeed);
     var windSpeedRound = Math.round(windSpeed);
     console.log(windSpeedRound);
-    var pWindSpeed = windSpeedRound + " meter/sec"
+    var pWindSpeed = "Wind speed: " + windSpeedRound + " meter/sec"
 
 
 
@@ -135,6 +135,7 @@ function displayWeatherData(weather) {
     $("#sunriseDiv").text(pSunrise);
     $("#sunsetDiv").text(pSunset);
     $("#weatherIcon").html(weatherIconImage);
+    $("#currentDateTime").text(pCurrentTime)
 
 }
 
