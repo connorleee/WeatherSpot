@@ -1,9 +1,11 @@
 
 
 var longLat = document.getElementById("display");
+$('.mainWeatherCard').hide();
 
 function getLocation() {
   $('#currentLocation').empty();
+  $('.mainWeatherCard').hide();
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition);
   } else { 
@@ -44,12 +46,9 @@ $('.splat-toggle.toggle').on('click', function() {
 makeItRain();
 function showPosition(position) {
     $('.weatherMain').empty();
-
+    $('.mainWeatherCard').show();
     var longitude = position.coords.longitude.toFixed(2);
     var latitude = position.coords.latitude.toFixed(2);
-
-    // longLat.innerHTML = "Latitude: " + latitude + 
-    // "<br>Longitude: " + longitude;
 
     var APIKey = "2beabda251abb98dae56b0873a993af5";
 
@@ -70,8 +69,10 @@ function showPosition(position) {
       var humidity = $("<div>").text("Humidity: " + response.main.humidity);
       var temperature = $("<div>").text("Temperature (F) " + response.main.temp);
       
-    $(".weatherMain").append(wind, humidity, temperature);
+    $(".weatherMain").append(humidity);
     $('#currentLocation').append(city);
+    $('#windSpeedDiv').append(wind);
+    $('#temperatureDiv').append(temperature);
 
     });
 };
@@ -79,6 +80,7 @@ function showPosition(position) {
 function displayLocation() {
   $('.weatherMain').empty();
   $('#currentLocation').empty();
+  
 var location = $(".location").val().trim();;
 
 
@@ -104,7 +106,10 @@ var APIKey = "2beabda251abb98dae56b0873a993af5";
         var humidity = $("<div>").text("Humidity: " + response.main.humidity);
         var temperature = $("<div>").text("Temperature (F) " + response.main.temp);
 
-        $(".weatherMain").append(wind, humidity, temperature);
+        $(".mainWeatherCard").append(humidity);
+        $('#temperatureDiv').append(temperature);
+        $('#windSpeedDiv').append(wind);
+        
         $('#currentLocation').append(city);
       });
 };
