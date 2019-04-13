@@ -1,6 +1,6 @@
-
-
-//If user check the "Allow this page to use your location checkbox", the page will detect the user's city automatically
+var api = {
+    weatherApi: function() {
+        //If user check the "Allow this page to use your location checkbox", the page will detect the user's city automatically
 $(":checkbox").on("click", function getLocation() {
     //Use HTML5 Geolocation API to get the geographical position of a user
 
@@ -157,3 +157,7 @@ function displayWeatherByCity() {
 
 //Adding a click event listener to search button
 $(document).on("click", ".submit", displayWeatherByCity);
+
+    }
+}
+
