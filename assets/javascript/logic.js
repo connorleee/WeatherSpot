@@ -31,3 +31,4 @@ $('.splat-toggle.toggle').on('click', function() {
 });
 
 makeItRain();
+api.weatherApi();

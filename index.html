@@ -97,7 +97,10 @@
             </div>
         </div>
         <div class='row appHeaderLeft'>
-            <h2 class='col' id='appHeader'>Weather Spot Logo</h2>
+            <h2 class='col' id='appHeader'>Weather Spot</h2>
+        </div>
+        <div>
+            <h4 class='col'><span id='currentDateTime'></span></h4>
         </div>
     </div>
     <div class='container-fluid'>
@@ -110,17 +113,8 @@
             </div>
         </div>
     </div>
-    <div class='container'>
-        <p id="display"></p>
-        <div class='weatherMain'>
-            <p>Test</p>
-
-        </div>
-    </div>
-    
     <div class='footer'>
         <div class='container weatherDetails'>
-            Footer
             <div class="card mainWeatherCard" style="max-width: 302px;">
 
                 <!-- Heading -->
@@ -133,7 +127,7 @@
                     <h6 class="card-subtitle text-muted"><span id='sunsetDiv'></span></h6>
                 </div>
                 <!-- Image -->
-                <img src='' alt="">
+                <div id='weatherIcon'></div>
                 
                 <!-- Text Content -->
                 <div class="card-body">
@@ -144,7 +138,7 @@
         </div>
     </div>
     <script src='assets/javascript/spotify.js'></script>
-    <script src='assets/javascript/weather.js'></script>
+    <script src='assets/javascript/api.js'></script>
     <script src='assets/javascript/logic.js'></script>
 </body>
 </html>
