@@ -1,3 +1,5 @@
+
+// Global weather declaration in order to use it cross script/method
 var api = [{
     // Weather API Call
     weatherApi: function () {
@@ -30,6 +32,8 @@ var api = [{
                             }).then(function (weather) {
                                 displayWeatherData(weather);
                                 console.log(weather)
+
+                                api[1].youtubeApi(weatherMain);
                             })
                         }
                         displayWeatherByGeolocation();
@@ -137,15 +141,13 @@ var api = [{
             $("#weatherIcon").html(weatherIconImage);
             $("#currentDateTime").text(pCurrentTime)
 
-            return weatherMain;
-
         }
 
         //If user doesn't check "Allow this page to use your location checkbox"， user needs to input the city name or zip code(doesn't allow to submit empty form)
 
         function displayWeatherByCity() {
-            var APIKey = "78c022ae7b87430bbaabb56f3fd651a0";
             var cityName = $(".location").val().trim();
+            var APIKey = "78c022ae7b87430bbaabb56f3fd651a0";
 
             var queryURLCity = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + APIKey + "&units=imperial";
 
@@ -154,19 +156,24 @@ var api = [{
                 method: "GET",
             }).then(function (weather) {
                 displayWeatherData(weather);
+
+                // calls the youtube API 
+                api[1].youtubeApi(weatherMain);
             })
+
         }
 
         //Adding a click event listener to search button
         $(document).on("click", ".submit", displayWeatherByCity);
 
-        api[1].youtubeApi(weatherMain);
     }
 },
 
 // Youtube API Call
 {
     youtubeApi: function (weatherMainReturn) {
+
+        console.log("----weatherMainReturn: " + weatherMainReturn)
 
         var pidDrizzle = "PLuXiwKradYWMuaTv2KlL134p4hqiDjIl3"; /* Acoustic Guitar Instrumentals */
         var pidClouds = "PLKYTmz7SemaqVDF6XJ15bv_8-j7ckkNgb"; /* lo-fi hip hop */
@@ -175,14 +182,15 @@ var api = [{
         var pidRain = "PLJzjrheyqoDVnOXyOCluGuBtV0K-8seCC"; /* Rainy Day */
         var pidClear = "PLHOyawPtVknXCyiXycVftCM-8LOICtBp6"; /* Have a great day */
 
+
         var currentWeather;
-        // TODO: conditionals to insert current weather 
-        if (weatherMainReturn = "Rain") { currentWeather = pidRain }
-        else if (weatherMainReturn = "Clear") { currentWeather = pidClear }
-        else if (weatherMainReturn = "Thunderstorm") { currentWeather = pidThunder }
-        else if (weatherMainReturn = "Drizzle") { currentWeather = pidDrizzle }
-        else if (weatherMainReturn = "Clouds") { currentWeather = pidClouds}
-        else if (weatherMainReturn = "Snow") { currentWeather = pidSnow}
+        // conditionals to insert current weather into query
+        if (weatherMainReturn === "Rain") { currentWeather = pidRain }
+        else if (weatherMainReturn === "Clear") { currentWeather = pidClear }
+        else if (weatherMainReturn === "Thunderstorm") { currentWeather = pidThunder }
+        else if (weatherMainReturn === "Drizzle") { currentWeather = pidDrizzle }
+        else if (weatherMainReturn === "Clouds") { currentWeather = pidClouds }
+        else if (weatherMainReturn === "Snow") { currentWeather = pidSnow }
 
         console.log("current weather: " + currentWeather)
 
@@ -199,6 +207,9 @@ var api = [{
 
             var list = $("<ul>").attr("id", "vidList")
             $("#youtubeApp").html(list)
+
+
+
             var playlist = response.items;
             for (let i = 0; i < playlist.length; i++) {
                 var listItems = $("<li>").append(playlist[i].snippet.title);
@@ -206,5 +217,6 @@ var api = [{
             }
         })
     }
-}]
+}
+]
 

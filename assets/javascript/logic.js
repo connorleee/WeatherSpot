@@ -1,5 +1,3 @@
-
-// Global weather declaration in order to use it cross script/method
 var weatherMain;
 
 var makeItRain = function() {
@@ -35,3 +33,5 @@ $('.splat-toggle.toggle').on('click', function() {
 
 makeItRain();
 api[0].weatherApi();
+
+// api[1].youtubeApi(weatherMain);
