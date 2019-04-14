@@ -173,7 +173,7 @@ var api = [{
 {
     youtubeApi: function (weatherMainReturn) {
 
-        console.log("----weatherMainReturn: " + weatherMainReturn)
+        console.log("weatherMainReturn: " + weatherMainReturn)
 
         var pidDrizzle = "PLuXiwKradYWMuaTv2KlL134p4hqiDjIl3"; /* Acoustic Guitar Instrumentals */
         var pidClouds = "PLKYTmz7SemaqVDF6XJ15bv_8-j7ckkNgb"; /* lo-fi hip hop */
@@ -207,8 +207,6 @@ var api = [{
 
             var list = $("<ul>").attr("id", "vidList")
             $("#youtubeApp").html(list)
-
-
 
             var playlist = response.items;
             for (let i = 0; i < playlist.length; i++) {
