@@ -171,7 +171,7 @@ var api = [{
         var pidClear = "PLHOyawPtVknXCyiXycVftCM-8LOICtBp6"; /* Have a great day */
 
         var apiKey = "AIzaSyB7sFAVldHcGO73tmAfQk3axlCJaTKQNMk";
-        var maxResults = 25;
+        var maxResults = 10;
         var queryURL = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=" + pidThunder + "&key=" + apiKey + "&maxResults=" + maxResults;
 
         $.ajax({
@@ -184,7 +184,7 @@ var api = [{
             $("#youtubeApp").html(list)
             var playlist = response.items;
             for (let i = 0; i < playlist.length; i++) {
-                var listItems = $("<li>").append(playlist[i].snippet.title);
+                var listItems = $("<li>").addClass("playlistTitle").attr("videoID", playlist[i].snippet.resourceId.videoId).append(playlist[i].snippet.title);
                 $("#vidList").append(listItems);
             } 
         })

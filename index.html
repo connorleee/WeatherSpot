@@ -85,38 +85,47 @@
         </div>
     </div>
 <!-- end sun html -->
+
 <!-- rain html -->
     <div class="rain front-row"></div>
     <div class="rain back-row"></div>
 <!-- end rain html -->
-    <div class='container-fluid'>
-        <div class='row'>
-            <h1 class='col' id='currentLocationTitle'>Current Location: <span id='currentLocation'></span></h1>
-            <div class='embed-container' id='youtubeApp'>
-                <!-- <iframe src='https://open.spotify.com/embed/track/0mUyMawtxj1CJ76kn9gIZK' width='300' height='80' frameborder='0' allowtransparency='true' allow='encrypted-media' id='spotify'></iframe> -->
-            </div>
-        </div>
-        <div class='row appHeaderLeft'>
-            <h2 class='col' id='appHeader'>Weather Spot</h2>
-        </div>
-        <div>
-            <h4 class='col'><span id='currentDateTime'></span></h4>
+
+<!-- App Header & Current time -->
+<div class='row appHeaderLeft'>
+        <h2 class='col' id='appHeader'>Weather Spot</h2>
+    <div>
+        <h4 class='col'><span id='currentDateTime'></span></h4>
+    </div>
+</div>
+<!-- Current Location, Youtube Player & Right Column Container -->
+<div class='container-fluid'>
+    <div class='row'>
+        <!-- Current Location -->
+        <h1 class='col-md-8' id='currentLocationTitle'>Current Location: <span id='currentLocation'></span></h1>
+        <!-- YouTube Player -->
+        <div class='col-md-4 embed-container' id='youtubePlayer'>
+            <iframe width="380" height="250" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
         </div>
     </div>
+    <!-- Right Column -->
     <div class='container-fluid'>
         <div id='rightColumn'>
             <div class="col-auto">
                 <i class="fas fa-search h4 text-body"></i>
                 <p>Allow this page to use your location <input type="checkbox"></p>
-                <input class="form-control form-control-lg form-control-borderless location" type="search" placeholder="Find Location">
+                <input class="form-control form-control-lg form-control-borderless location" type="search" placeholder="Find Location"><br>
                 <button class="btn btn-sm btn-success submit" type="submit">Search</button>
             </div>
         </div>
     </div>
-    <div class='footer'>
-        <div class='container weatherDetails'>
+</div>
+<!-- Weather Details, Playlist details -->
+<div class='container-fluid'>
+    <div class='row'>
+        <!-- Weather Card - Weather Details -->
+        <div class='col-md-8 container weatherDetails'>
             <div class="card mainWeatherCard" style="max-width: 302px;">
-
                 <!-- Heading -->
                 <div class="card-body">
                     <h2 class="card-title"><span id='temperatureDiv'></span></h2>
@@ -128,16 +137,22 @@
                 </div>
                 <!-- Image -->
                 <div id='weatherIcon'></div>
-                
                 <!-- Text Content -->
                 <div class="card-body">
                     <p class="card-text"></p>
                 </div>
-                
             </div>
         </div>
+        <!-- Youtube Playlist -->
+        <div class='col-md-4 embed-container' id='youtubeApp'></div>
     </div>
-    <script src='assets/javascript/api.js'></script>
-    <script src='assets/javascript/logic.js'></script>
+</div>
+
+<!-- Footer -->
+<div class='footer'></div>
+
+<script src='assets/javascript/api.js'></script>
+<script src='assets/javascript/logic.js'></script>
+    
 </body>
 </html>
