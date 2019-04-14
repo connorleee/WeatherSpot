@@ -1,3 +1,4 @@
+var weatherMain;
 
 var makeItRain = function() {
   //clear out everything
@@ -31,4 +32,6 @@ $('.splat-toggle.toggle').on('click', function() {
 });
 
 makeItRain();
-api.weatherApi();
+api[0].weatherApi();
+
+// api[1].youtubeApi(weatherMain);
