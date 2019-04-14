@@ -31,7 +31,15 @@ $('.splat-toggle.toggle').on('click', function() {
   makeItRain();
 });
 
+
+
 makeItRain();
 api[0].weatherApi();
 
-// api[1].youtubeApi(weatherMain);
+api[1].youtubeApi();
+
+$(document).on('click','.playlistTitle',function() {
+$('iframe').attr('src', 'https://www.youtube.com/embed/' + $(this).attr('videoID'))
+        console.log("test");
+        console.log($(this).attr('videoID'));
+    })

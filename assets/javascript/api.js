@@ -210,7 +210,7 @@ var api = [{
 
             var playlist = response.items;
             for (let i = 0; i < playlist.length; i++) {
-                var listItems = $("<li>").append(playlist[i].snippet.title);
+                var listItems = $("<li>").addClass("playlistTitle").attr("videoID", playlist[i].snippet.resourceId.videoId).append(playlist[i].snippet.title);
                 $("#vidList").append(listItems);
             }
         })
