@@ -1,4 +1,5 @@
-
+// TODO: array of objects tying mood to weather. Playlists will be attached to mood
+// TODO: logic to take weather API call and pull from above array
 
 var playlistID = "37i9dQZF1DX7KNKjOK0o75"
 var queryURL = "https://api.spotify.com/v1/playlists/" + playlistID
@@ -15,5 +16,5 @@ $.ajax({
 
 }).then(function (response) {
     console.log(response);
-    
+
 })
