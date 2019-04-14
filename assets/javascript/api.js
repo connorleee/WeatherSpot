@@ -29,7 +29,7 @@ var api = [{
                                 method: "GET",
                             }).then(function (weather) {
                                 displayWeatherData(weather);
-
+                                console.log(weather)
                             })
                         }
                         displayWeatherByGeolocation();
@@ -53,7 +53,7 @@ var api = [{
 
         function displayWeatherData(weather) {
             //console.log(queryURLGeolocation);
-            console.log(weather)
+            console.log("displayWeatherData: " + weather)
             //retrieve country name and city name
             var countryNameByGeolocation = weather.sys.country;
             console.log(countryNameByGeolocation);
@@ -69,37 +69,36 @@ var api = [{
 
             //retrieve weather icon
             var weatherIconID = weather.weather[0].icon;
-            console.log(weatherIconID);
+            console.log("WeatherIconID: " + weatherIconID);
             var weatherIconURL = "http://openweathermap.org/img/w/" + weatherIconID + ".png";
-            console.log(weatherIconURL);
+            console.log("weatherIconURL: " + weatherIconURL);
             var weatherIconImage = $("<img>").attr("src", weatherIconURL)
-            console.log(weatherIconImage);
+            console.log("weatherIconImage: " + weatherIconImage);
 
             //retrieve temperature
             var currentTemp = weather.main.temp;
-            console.log(currentTemp);
+            console.log("currentTemp: " + currentTemp);
             var currentTempRound = Math.round(currentTemp);
-            console.log(currentTempRound);
+            console.log("currentTempRound: " + currentTempRound);
             var pCurrentTemp = currentTempRound + " Fahrenheit";
 
 
-
             //retrieve main weather condition
-            var weatherMain = weather.weather[0].main;
-            console.log(weatherMain);
+            weatherMain = weather.weather[0].main;
+            console.log("weatherMain: " + weatherMain);
             var pWeatherMain = weatherMain;
 
 
             //Show current time and data
             var currentTime = moment().format("MMM Do YYYY, hh:mm A")
-            console.log(currentTime);
+            console.log("currentTime: " + currentTime);
             var pCurrentTime = currentTime;
 
             //retrieve wind speed data
             var windSpeed = weather.wind.speed;
-            console.log(windSpeed);
+            console.log("windSpeed: " + windSpeed);
             var windSpeedRound = Math.round(windSpeed);
-            console.log(windSpeedRound);
+            console.log("windSpeedRound: " + windSpeedRound);
             var pWindSpeed = "Wind speed: " + windSpeedRound + " meter/sec"
 
 
@@ -111,15 +110,15 @@ var api = [{
 
             //retrieve humudity
             var humidity = weather.main.humidity;
-            console.log(humidity);
+            console.log("humidity: " + humidity);
             var humidityRound = Math.round(humidity);
-            console.log(humidityRound);
+            console.log("humidityRoun: " + humidityRound);
             var pHumidity = "Humidity: " + humidityRound + "%";
 
             //retrieve sunrise data
             var sunrise = weather.sys.sunrise;
             var sunrisePrettify = moment(sunrise, "X").format("hh:mm A");
-            console.log(sunrisePrettify);
+            console.log("sunrisePrettify: " + sunrisePrettify);
             var pSunrise = "Sunrise: " + sunrisePrettify;
 
             //retrieve sunset data
@@ -137,6 +136,8 @@ var api = [{
             $("#sunsetDiv").text(pSunset);
             $("#weatherIcon").html(weatherIconImage);
             $("#currentDateTime").text(pCurrentTime)
+
+            return weatherMain;
 
         }
 
@@ -159,20 +160,36 @@ var api = [{
         //Adding a click event listener to search button
         $(document).on("click", ".submit", displayWeatherByCity);
 
+        api[1].youtubeApi(weatherMain);
     }
 },
 
 // Youtube API Call
 {
-    youtubeApi: function () {
+    youtubeApi: function (weatherMainReturn) {
+
+        var pidDrizzle = "PLuXiwKradYWMuaTv2KlL134p4hqiDjIl3"; /* Acoustic Guitar Instrumentals */
+        var pidClouds = "PLKYTmz7SemaqVDF6XJ15bv_8-j7ckkNgb"; /* lo-fi hip hop */
         var pidSnow = "RD6HckCca2lA8"
         var pidThunder = "PLsj2E7daicxYNzGv_aFjKhzTsb4wtviz9"; /* Thunderstruck \m/ */
         var pidRain = "PLJzjrheyqoDVnOXyOCluGuBtV0K-8seCC"; /* Rainy Day */
         var pidClear = "PLHOyawPtVknXCyiXycVftCM-8LOICtBp6"; /* Have a great day */
 
+        var currentWeather;
+        // TODO: conditionals to insert current weather 
+        if (weatherMainReturn = "Rain") { currentWeather = pidRain }
+        else if (weatherMainReturn = "Clear") { currentWeather = pidClear }
+        else if (weatherMainReturn = "Thunderstorm") { currentWeather = pidThunder }
+        else if (weatherMainReturn = "Drizzle") { currentWeather = pidDrizzle }
+        else if (weatherMainReturn = "Clouds") { currentWeather = pidClouds}
+        else if (weatherMainReturn = "Snow") { currentWeather = pidSnow}
+
+        console.log("current weather: " + currentWeather)
+
         var apiKey = "AIzaSyB7sFAVldHcGO73tmAfQk3axlCJaTKQNMk";
-        var maxResults = 25;
-        var queryURL = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=" + pidThunder + "&key=" + apiKey + "&maxResults=" + maxResults;
+        var maxResults = 5;
+
+        var queryURL = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=" + currentWeather + "&key=" + apiKey + "&maxResults=" + maxResults;
 
         $.ajax({
             url: queryURL,
@@ -186,7 +203,7 @@ var api = [{
             for (let i = 0; i < playlist.length; i++) {
                 var listItems = $("<li>").append(playlist[i].snippet.title);
                 $("#vidList").append(listItems);
-            } 
+            }
         })
     }
 }]
