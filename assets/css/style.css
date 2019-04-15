@@ -10,6 +10,15 @@
     text-shadow: 0.5px 1px 1px #000;
     color: #fff;
 }
+
+#youtubeText {
+    text-shadow: 0.5px 1px 1px #000;
+    color: #fff;
+    font-family: 'Fjalla One', sans-serif;
+    text-transform: uppercase;
+    padding-right: 15px;
+    padding-top: 15px;
+}
 #background {
     position: absolute;
     top: 0;
@@ -25,15 +34,15 @@
     background-color: #113876;
     font-weight: bold;
     color: #fff;
-    width: 20%; 
+    width: 18%; 
     position: absolute;
     right: 0;
     top: 0;
-    padding-left: 20px;
+    padding-left: 5px;
     padding-top: 20px;
 }
 .row {
-    width: 80%;
+    width: 82%;
 }
 .footer {
     position: absolute;
@@ -58,11 +67,67 @@
     color: #fff;
     /* border: 1px solid black; */
 }
-#spotify {
-    opacity: 0.8;
-    /* margin-top: 20px; */
+#youtubePlayer {
+    padding: 0px;
     border: 2px solid #444;
 }
+
+#youtubeApp {
+    text-align: right;
+}
+*{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.btn-hover, .submit {
+    width: 200px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    margin: 5px;
+    height: 50px;
+    text-align:center;
+    border: none;
+    background-size: 300% 100%;
+
+    border-radius: 50px;
+    -moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.btn-hover:hover, .submit:hover {
+    background-position: 100% 0;
+    -moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.btn-hover:focus, .submit:focus {
+    outline: none;
+}
+
+.playlistTitle.btn-hover, .submit {
+    background-image: linear-gradient(to right, #25aae1, #40e495, #30dd8a, #2bb673);
+    box-shadow: 0 4px 15px 0 rgba(49, 196, 190, 0.75);
+}
+
+.playlistTitle{
+    text-transform: capitalize;
+}
+.submit {
+    height: 40px;
+    width: 60px;
+    margin-top: 10px;
+    border-radius: 5px;
+    margin-left: 0;
+}
+
 .container {
     color: #000;
 }
@@ -197,9 +262,9 @@ background:#2EB5E5 ;
 .sun { 
 position: absolute;
     top:0;
-    left:30%;
-    right:0;
-    bottom:30%;
+    left:0;
+    right:1%;
+    bottom:50%;
     margin: auto;  
     width:70px;
     height:70px;
