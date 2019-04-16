@@ -39,7 +39,5 @@ api[0].weatherApi();
 api[1].youtubeApi();
 
 $(document).on('click','.playlistTitle',function() {
-$('iframe').attr('src', 'https://www.youtube.com/embed/' + $(this).attr('videoID'))
-        console.log("test");
-        console.log($(this).attr('videoID'));
+  $('iframe').attr('src', 'https://www.youtube.com/embed/' + $(this).attr('videoID'))
     })

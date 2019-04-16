@@ -172,6 +172,7 @@ var api = [{
 // Youtube API Call
 {
     youtubeApi: function (weatherMainReturn) {
+        $("#youtubeApp").empty();
 
         console.log("weatherMainReturn: " + weatherMainReturn)
 
@@ -183,21 +184,21 @@ var api = [{
         var pidClear = "PLHOyawPtVknXCyiXycVftCM-8LOICtBp6"; /* Have a great day */
 
 
-        var currentWeather;
+        var currentWeatherPlaylist;
         // conditionals to insert current weather into query
-        if (weatherMainReturn === "Rain") { currentWeather = pidRain }
-        else if (weatherMainReturn === "Clear") { currentWeather = pidClear }
-        else if (weatherMainReturn === "Thunderstorm") { currentWeather = pidThunder }
-        else if (weatherMainReturn === "Drizzle") { currentWeather = pidDrizzle }
-        else if (weatherMainReturn === "Clouds") { currentWeather = pidClouds }
-        else if (weatherMainReturn === "Snow") { currentWeather = pidSnow }
+        if (weatherMainReturn === "Rain") { currentWeatherPlaylist = pidRain }
+        else if (weatherMainReturn === "Clear") { currentWeatherPlaylist = pidClear }
+        else if (weatherMainReturn === "Thunderstorm") { currentWeatherPlaylist = pidThunder }
+        else if (weatherMainReturn === "Drizzle") { currentWeatherPlaylist = pidDrizzle }
+        else if (weatherMainReturn === "Clouds") { currentWeatherPlaylist = pidClouds }
+        else if (weatherMainReturn === "Snow") { currentWeatherPlaylist = pidSnow }
 
-        console.log("current weather: " + currentWeather)
+        console.log("current weather playlist: " + currentWeatherPlaylist)
 
         var apiKey = "AIzaSyB7sFAVldHcGO73tmAfQk3axlCJaTKQNMk";
         var maxResults = 5;
 
-        var queryURL = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=" + currentWeather + "&key=" + apiKey + "&maxResults=" + maxResults;
+        var queryURL = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=" + currentWeatherPlaylist + "&key=" + apiKey + "&maxResults=" + maxResults;
 
         $.ajax({
             url: queryURL,
@@ -205,14 +206,17 @@ var api = [{
         }).then(function (response) {
             console.log(response.items)
 
-            var list = $("<ul>").attr("id", "vidList")
-            $("#youtubeApp").html(list)
+            var youtubeText = $("<div>").attr("id", "youtubeText").html("<h4>Music Suggestions</h4>");
+            var list = $("<div>").attr("id", "vidList")
+            $("#youtubeApp").append(youtubeText).append(list)
 
             var playlist = response.items;
             for (let i = 0; i < playlist.length; i++) {
-                var listItems = $("<li>").addClass("playlistTitle").attr("videoID", playlist[i].snippet.resourceId.videoId).append(playlist[i].snippet.title);
+                var playlistTitle = playlist[i].snippet.title.split(' ').slice(0, 5).join(' ');
+                var listItems = $("<button>").addClass("playlistTitle btn-hover").attr("videoID", playlist[i].snippet.resourceId.videoId).append(playlistTitle);
                 $("#vidList").append(listItems);
             }
+            
         })
     }
 }
