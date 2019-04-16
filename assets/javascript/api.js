@@ -8,8 +8,8 @@ var api = [{
             //Use HTML5 Geolocation API to get the geographical position of a user
 
             if (navigator.geolocation) {
-                console.log(navigator);
-                console.log(navigator.geolocation);
+                // console.log(navigator);
+                // console.log(navigator.geolocation);
 
                 //Use getCurrentPosition() method to return the user's position
                 navigator.geolocation.getCurrentPosition(
@@ -32,7 +32,7 @@ var api = [{
                                 method: "GET",
                             }).then(function (weather) {
                                 displayWeatherData(weather);
-                                console.log(weather)
+                                // console.log(weather)
 
                                 api[1].youtubeApi(weatherMain);
                             })
@@ -75,9 +75,9 @@ var api = [{
         function displayWeatherData(weather) {
             //retrieve country name and city name
             var countryNameByGeolocation = weather.sys.country;
-            console.log(countryNameByGeolocation);
+            // console.log(countryNameByGeolocation);
             var cityNameByGeolocation = weather.name;
-            console.log(cityNameByGeolocation);
+            // console.log(cityNameByGeolocation);
 
             //combine city name and country
             var cityAndCountry = cityNameByGeolocation + ", " + countryNameByGeolocation;
@@ -88,7 +88,7 @@ var api = [{
 
             //retrieve weather icon
             var weatherIconID = weather.weather[0].icon;
-            console.log("WeatherIconID: " + weatherIconID);
+            // console.log("WeatherIconID: " + weatherIconID);
             var weatherIconURL = "http://openweathermap.org/img/w/" + weatherIconID + ".png";
             console.log("weatherIconURL: " + weatherIconURL);
             var weatherIconImage = $("<img>").attr("src", weatherIconURL)
@@ -96,9 +96,9 @@ var api = [{
 
             //retrieve temperature
             var currentTemp = weather.main.temp;
-            console.log("currentTemp: " + currentTemp);
+            // console.log("currentTemp: " + currentTemp);
             var currentTempRound = Math.round(currentTemp);
-            console.log("currentTempRound: " + currentTempRound);
+            // console.log("currentTempRound: " + currentTempRound);
             var pCurrentTemp = currentTempRound + " Fahrenheit";
 
 
@@ -113,9 +113,9 @@ var api = [{
 
             //retrieve wind speed data
             var windSpeed = weather.wind.speed;
-            console.log("windSpeed: " + windSpeed);
+            // console.log("windSpeed: " + windSpeed);
             var windSpeedRound = Math.round(windSpeed);
-            console.log("windSpeedRound: " + windSpeedRound);
+            // console.log("windSpeedRound: " + windSpeedRound);
             var pWindSpeed = "Wind speed: " + windSpeedRound + " meter/sec"
 
 
@@ -127,21 +127,21 @@ var api = [{
 
             //retrieve humudity
             var humidity = weather.main.humidity;
-            console.log("humidity: " + humidity);
+            // console.log("humidity: " + humidity);
             var humidityRound = Math.round(humidity);
-            console.log("humidityRoun: " + humidityRound);
+            // console.log("humidityRoun: " + humidityRound);
             var pHumidity = "Humidity: " + humidityRound + "%";
 
             //retrieve sunrise data
             var sunrise = weather.sys.sunrise;
             var sunrisePrettify = moment(sunrise, "X").format("hh:mm A");
-            console.log("sunrisePrettify: " + sunrisePrettify);
+            // console.log("sunrisePrettify: " + sunrisePrettify);
             var pSunrise = "Sunrise: " + sunrisePrettify;
 
             //retrieve sunset data
             var sunset = weather.sys.sunset;
             var sunsetPrettify = moment(sunset, "X").format("hh:mm A");
-            console.log(sunsetPrettify);
+            // console.log(sunsetPrettify);
             var pSunset = "Sunset: " + sunsetPrettify;
 
             //Put the above weather data into html
@@ -219,6 +219,10 @@ var api = [{
         //If user doesn't check "Allow this page to use your location checkbox"， user needs to input the city name(doesn't allow to submit empty form)
 
         function displayWeatherByCity() {
+            $('.rain').hide();
+            $('.snowflakes').hide();
+            $('.storm').hide();
+            $('.sun').hide();
             var cityName = $(".location").val().trim();
             var APIKey = "78c022ae7b87430bbaabb56f3fd651a0";
             var queryURLCity = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + APIKey + "&units=imperial";
@@ -265,8 +269,9 @@ var api = [{
 // Youtube API Call
 {
     youtubeApi: function (weatherMainReturn) {
+        $("#youtubeApp").empty();
 
-        console.log("weatherMainReturn: " + weatherMainReturn)
+        // console.log("weatherMainReturn: " + weatherMainReturn)
 
         var pidDrizzle = "PLuXiwKradYWMuaTv2KlL134p4hqiDjIl3"; /* Acoustic Guitar Instrumentals */
         var pidClouds = "PLKYTmz7SemaqVDF6XJ15bv_8-j7ckkNgb"; /* lo-fi hip hop */
@@ -276,21 +281,21 @@ var api = [{
         var pidClear = "PLHOyawPtVknXCyiXycVftCM-8LOICtBp6"; /* Have a great day */
 
 
-        var currentWeather;
+        var currentWeatherPlaylist;
         // conditionals to insert current weather into query
-        if (weatherMainReturn === "Rain") { currentWeather = pidRain }
-        else if (weatherMainReturn === "Clear") { currentWeather = pidClear }
-        else if (weatherMainReturn === "Thunderstorm") { currentWeather = pidThunder }
-        else if (weatherMainReturn === "Drizzle") { currentWeather = pidDrizzle }
-        else if (weatherMainReturn === "Clouds") { currentWeather = pidClouds }
-        else if (weatherMainReturn === "Snow") { currentWeather = pidSnow }
+        if (weatherMainReturn === "Rain") { currentWeatherPlaylist = pidRain }
+        else if (weatherMainReturn === "Clear") { currentWeatherPlaylist = pidClear }
+        else if (weatherMainReturn === "Thunderstorm") { currentWeatherPlaylist = pidThunder }
+        else if (weatherMainReturn === "Drizzle") { currentWeatherPlaylist = pidDrizzle }
+        else if (weatherMainReturn === "Clouds") { currentWeatherPlaylist = pidClouds }
+        else if (weatherMainReturn === "Snow") { currentWeatherPlaylist = pidSnow }
 
-        console.log("current weather: " + currentWeather)
+        // console.log("current weather playlist: " + currentWeatherPlaylist)
 
         var apiKey = "AIzaSyB7sFAVldHcGO73tmAfQk3axlCJaTKQNMk";
         var maxResults = 5;
 
-        var queryURL = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=" + currentWeather + "&key=" + apiKey + "&maxResults=" + maxResults;
+        var queryURL = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=" + currentWeatherPlaylist + "&key=" + apiKey + "&maxResults=" + maxResults;
 
         $.ajax({
             url: queryURL,
@@ -298,14 +303,17 @@ var api = [{
         }).then(function (response) {
             console.log(response.items)
 
-            var list = $("<ul>").attr("id", "vidList")
-            $("#youtubeApp").html(list)
+            var youtubeText = $("<div>").attr("id", "youtubeText").html("<h4>Music Suggestions</h4>");
+            var list = $("<div>").attr("id", "vidList")
+            $("#youtubeApp").append(youtubeText).append(list)
 
             var playlist = response.items;
             for (let i = 0; i < playlist.length; i++) {
-                var listItems = $("<li>").addClass("playlistTitle").attr("videoID", playlist[i].snippet.resourceId.videoId).append(playlist[i].snippet.title);
+                var playlistTitle = playlist[i].snippet.title.split(' ').slice(0, 5).join(' ');
+                var listItems = $("<button>").addClass("playlistTitle btn-hover").attr("videoID", playlist[i].snippet.resourceId.videoId).append(playlistTitle);
                 $("#vidList").append(listItems);
             }
+            
         })
     }
 }

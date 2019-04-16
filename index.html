@@ -102,10 +102,10 @@
 <div class='container-fluid'>
     <div class='row'>
         <!-- Current Location -->
-        <h1 class='col-md-8' id='currentLocationTitle'>Current Location: <span id='currentLocation'></span></h1>
+        <h1 class='col-md-9' id='currentLocationTitle'>Current Location: <span id='currentLocation'></span></h1>
         <!-- YouTube Player -->
-        <div class='col-md-4 embed-container' id='youtubePlayer'>
-            <iframe width="380" height="250" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
+        <div class='col-md-3 embed-container'>
+            <iframe id='youtubePlayer' width = "280px" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
         </div>
     </div>
     <!-- Right Column -->
@@ -114,7 +114,7 @@
             <div class="col-auto">
                 <i class="fas fa-search h4 text-body"></i>
                 <p>Allow this page to use your location <input type="checkbox"></p>
-                <input class="form-control form-control-lg form-control-borderless location" type="search" placeholder="Find Location"><br>
+                <input class="form-control form-control-lg form-control-borderless location" type="search" placeholder="Find Location">
                 <button class="btn btn-sm btn-success submit" type="submit">Search</button>
             </div>
         </div>
@@ -124,19 +124,19 @@
 <div class='container-fluid'>
     <div class='row'>
         <!-- Weather Card - Weather Details -->
-        <div class='col-md-8 container weatherDetails'>
+        <div class='col-md-9 container weatherDetails'>
             <div class="card mainWeatherCard" style="max-width: 302px;">
                 <!-- Heading -->
                 <div class="card-body">
                     <h2 class="card-title"><span id='temperatureDiv'></span></h2>
-                    <h6 class="card-subtitle text-muted"><span id='descriptionDiv'></span></h6>
-                    <h6 class="card-subtitle text-muted"><span id='windSpeedDiv'></span></h6>
-                    <h6 class="card-subtitle text-muted"><span id='humidityDiv'></span></h6>
-                    <h6 class="card-subtitle text-muted"><span id='sunriseDiv'></span></h6>
-                    <h6 class="card-subtitle text-muted"><span id='sunsetDiv'></span></h6>
-                </div>
+                    <h6 class="card-subtitle"><span id='descriptionDiv'></span></h6>
                 <!-- Image -->
-                <div id='weatherIcon'></div>
+                    <div id='weatherIcon'></div>
+                    <h6 class="card-subtitle"><span id='windSpeedDiv'></span></h6>
+                    <h6 class="card-subtitle"><span id='humidityDiv'></span></h6>
+                    <h6 class="card-subtitle"><span id='sunriseDiv'></span></h6>
+                    <h6 class="card-subtitle"><span id='sunsetDiv'></span></h6>
+                </div>
                 <!-- Text Content -->
                 <div class="card-body">
                     <p class="card-text"></p>
@@ -144,7 +144,7 @@
             </div>
         </div>
         <!-- Youtube Playlist -->
-        <div class='col-md-4 embed-container' id='youtubeApp'></div>
+        <div class='col-md-3 embed-container' id='youtubeApp'></div>
     </div>
 </div>
 
