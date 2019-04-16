@@ -40,20 +40,20 @@ var api = [{
                         displayWeatherByGeolocation();
 
                         //Call openweathermap API and use the two parameters latitude and longitude to retrive 5 day/3 hour weather forecast data
-                        function displayWeatherForecastByGeolocation () {
+                        function displayWeatherForecastByGeolocation() {
                             var queryURLGeolocationForWeatherForecase = "https://api.openweathermap.org/data/2.5/forecast?lat=" + latitude + "&lon=" + longitude + "&appid=" + APIKey + "&units=imperial";
                             console.log(queryURLGeolocationForWeatherForecase);
-                            $.ajax ({
+                            $.ajax({
                                 url: queryURLGeolocationForWeatherForecase,
                                 method: "GET",
                             }).then(function (weatherForecast) {
                                 console.log(weatherForecast);
                                 displayWeatherForecastData(weatherForecast);
-                                
+
                             })
                         }
                         displayWeatherForecastByGeolocation();
-                        
+
                     },
 
                     function error(error_message) {
@@ -92,7 +92,7 @@ var api = [{
             var weatherIconURL = "http://openweathermap.org/img/w/" + weatherIconID + ".png";
             console.log("weatherIconURL: " + weatherIconURL);
             var weatherIconImage = $("<img>").attr("src", weatherIconURL)
-            console.log("weatherIconImage: " + weatherIconImage);
+
 
             //retrieve temperature
             var currentTemp = weather.main.temp;
@@ -108,10 +108,8 @@ var api = [{
             var pWeatherMain = weatherMain;
 
 
-            //Show current time and data
-            var currentTime = moment().format("MMM Do YYYY, hh:mm A")
-            console.log("currentTime: " + currentTime);
-            var pCurrentTime = currentTime;
+        
+
 
             //retrieve wind speed data
             var windSpeed = weather.wind.speed;
@@ -154,43 +152,56 @@ var api = [{
             $("#sunriseDiv").text(pSunrise);
             $("#sunsetDiv").text(pSunset);
             $("#weatherIcon").html(weatherIconImage);
-            $("#currentDateTime").text(pCurrentTime)
 
         }
+            //Show current time and data
+            var currentTime = moment().format("MMM Do YYYY, hh:mm A");
+            $("#currentDateTime").text(currentTime);
+
+            setInterval(function(){
+                currentTime = moment().format("MMM Do YYYY, hh:mm A")
+                var pCurrentTime = currentTime;
+                //console.log("currentTime: " + currentTime);
+                $("#currentDateTime").text(pCurrentTime)
+            }, 60*1000 );
+        
+        
+
+       
 
         //Define function displayWeatherForecastData to retrieve retrieve 5 day/3hour forecast weather data from weather api and display weather data in html
         function displayWeatherForecastData(weatherForecast) {
             console.log(weatherForecast);
-            
-            for (var i=0; i < weatherForecast.list.length; i++) {
-            //retrieve future Date
-            var futureDayOne = moment.utc(weatherForecast.list[i].dt, "X").format("ddd MMM Do");
-            console.log(futureDayOne);
 
-            //retrieve future day one at 03:00 AM
+            for (var i = 0; i < weatherForecast.list.length; i++) {
+                //retrieve future Date
+                var futureDayOne = moment(weatherForecast.list[i].dt, "X").format("ddd MMM Do");
+                console.log(futureDayOne);
 
-            var futureDayOneTimeThree = moment.utc(weatherForecast.list[i].dt, "X").format("hh:mm A");
-            console.log(futureDayOneTimeThree);
+                //retrieve future day one at 03:00 AM
 
-            //retrieve temperature at future day one at 03:00 AM
+                var futureDayOneTimeThree = moment(weatherForecast.list[i].dt, "X").format("hh:mm A");
+                console.log(futureDayOneTimeThree);
 
-            var futureDayOneTimeThreeTemp = weatherForecast.list[i].main.temp;
-            console.log(futureDayOneTimeThreeTemp);
+                //retrieve temperature at future day one at 03:00 AM
 
-            //retrieve weather icon at future day one at 03:00 AM
-            var weatherIconIDForFuture = weatherForecast.list[i].weather[0].icon;
-            console.log(weatherIconIDForFuture);
-            var weatherIconURLForFuture = "http://openweathermap.org/img/w/" + weatherIconIDForFuture + ".png";
-            console.log(weatherIconURLForFuture);
-            var weatherIconImageForFuture = $("<img>").attr("src", weatherIconURLForFuture);
+                var futureDayOneTimeThreeTemp = weatherForecast.list[i].main.temp;
+                console.log(futureDayOneTimeThreeTemp);
 
-            //retrieve weather description at future day one at 03:00 AM
-            var weatherDescriptionForFuture = weatherForecast.list[i].weather[0].description;
-            console.log(weatherDescriptionForFuture);
+                //retrieve weather icon at future day one at 03:00 AM
+                var weatherIconIDForFuture = weatherForecast.list[i].weather[0].icon;
+                console.log(weatherIconIDForFuture);
+                var weatherIconURLForFuture = "http://openweathermap.org/img/w/" + weatherIconIDForFuture + ".png";
+                console.log(weatherIconURLForFuture);
+                var weatherIconImageForFuture = $("<img>").attr("src", weatherIconURLForFuture);
 
-            //retrieve humidity at future day one at 03:00 AM
-            var humidityForFuture = weatherForecast.list[i].main.humidity + "%";
-            console.log(humidityForFuture);
+                //retrieve weather description at future day one at 03:00 AM
+                var weatherDescriptionForFuture = weatherForecast.list[i].weather[0].description;
+                console.log(weatherDescriptionForFuture);
+
+                //retrieve humidity at future day one at 03:00 AM
+                var humidityForFuture = weatherForecast.list[i].main.humidity + "%";
+                console.log(humidityForFuture);
             }
 
 
@@ -201,17 +212,17 @@ var api = [{
 
 
 
-        
+
 
         }
 
-        //If user doesn't check "Allow this page to use your location checkbox"， user needs to input the city name or zip code(doesn't allow to submit empty form)
+        //If user doesn't check "Allow this page to use your location checkbox"， user needs to input the city name(doesn't allow to submit empty form)
 
         function displayWeatherByCity() {
             var cityName = $(".location").val().trim();
             var APIKey = "78c022ae7b87430bbaabb56f3fd651a0";
-
             var queryURLCity = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + APIKey + "&units=imperial";
+            console.log(queryURLCity);
 
             $.ajax({
                 url: queryURLCity,
@@ -225,8 +236,28 @@ var api = [{
 
         }
 
+        //Display Weather Forecast for 5 day/3 hour by city name
+        function displayWeatherForecastByCity() {
+            var cityName = $(".location").val().trim();
+            var APIKey = "78c022ae7b87430bbaabb56f3fd651a0";
+            var queryURLCityForWeatherForecast = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=" + APIKey;
+            console.log(queryURLCityForWeatherForecast);
+
+            $.ajax({
+                url: queryURLCityForWeatherForecast,
+                method: "GET",
+            }).then(function (weatherForecast) {
+                console.log(weatherForecast);
+                displayWeatherForecastData(weatherForecast);
+            })
+        }
+
         //Adding a click event listener to search button
-        $(document).on("click", ".submit", displayWeatherByCity);
+        //$(document).on("click", ".submit", displayWeatherByCity);
+        $(".submit").on("click", function () {
+            displayWeatherByCity();
+            displayWeatherForecastByCity();
+        })
 
     }
 },
