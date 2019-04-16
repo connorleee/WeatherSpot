@@ -215,7 +215,10 @@ var api = [{
                 var playlistTitle = playlist[i].snippet.title.split(' ').slice(0, 5).join(' ');
                 var listItems = $("<button>").addClass("playlistTitle btn-hover").attr("videoID", playlist[i].snippet.resourceId.videoId).append(playlistTitle);
                 $("#vidList").append(listItems);
+                // TODO: shuffle the playlistItems. change max results to 100, and store all the playlistItems in an array. shuffle array. append first 5 songs in shuffled array to the DOM.
             }
+
+            // 
             
         })
     }
