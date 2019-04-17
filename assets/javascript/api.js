@@ -68,8 +68,7 @@ var api = [{
                 alert("Geolocation is not supported by this browser, please input your city name in the search box!")
             }
         })
-
-
+        
         //Define function displayWeatherData to retrieve current weather data from weather api and display weather data in html
 
         function displayWeatherData(weather) {
@@ -166,7 +165,6 @@ var api = [{
                     
                 }
             determineWeatherAnimation();
-        }
 
         }
             //Show current time and data
@@ -179,10 +177,6 @@ var api = [{
                 //console.log("currentTime: " + currentTime);
                 $("#currentDateTime").text(pCurrentTime)
             }, 60*1000 );
-        
-        
-
-       
 
         //Define function displayWeatherForecastData to retrieve retrieve 5 day/3hour forecast weather data from weather api and display weather data in html
         function displayWeatherForecastData(weatherForecast) {
@@ -218,17 +212,6 @@ var api = [{
                 var humidityForFuture = weatherForecast.list[i].main.humidity + "%";
                 console.log(humidityForFuture);
             }
-
-
-
-
-
-
-
-
-
-
-
         }
 
         //If user doesn't check "Allow this page to use your location checkbox"， user needs to input the city name(doesn't allow to submit empty form)
