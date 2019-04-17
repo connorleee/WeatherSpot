@@ -87,9 +87,24 @@
 <!-- end sun html -->
 
 <!-- rain html -->
-    <div class="rain front-row"></div>
-    <div class="rain back-row"></div>
+<div class="rain front-row"></div>
+<div class="rain back-row"></div>
+<div class="toggles"></div>
 <!-- end rain html -->
+
+<!-- fog html -->
+<div id="foglayer_01" class="fog">
+    <div class="image01"></div>
+    <div class="image02"></div>
+</div>
+<div id="foglayer_02" class="fog">
+    <div class="image01"></div>
+    <div class="image02"></div>
+</div>  
+<div id="foglayer_03" class="fog">
+    <div class="image01"></div>
+    <div class="image02"></div>
+</div>
 
 <!-- App Header & Current time -->
 <div class='row appHeaderLeft'>
@@ -108,6 +123,7 @@
             <iframe id='youtubePlayer' width = "280px" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
         </div>
     </div>
+
     <!-- Right Column -->
     <div class='container-fluid'>
         <div id='rightColumn'>
@@ -130,6 +146,7 @@
                 <div class="card-body">
                     <h2 class="card-title"><span id='temperatureDiv'></span></h2>
                     <h6 class="card-subtitle"><span id='descriptionDiv'></span></h6>
+                    
                 <!-- Image -->
                     <div id='weatherIcon'></div>
                     <h6 class="card-subtitle"><span id='windSpeedDiv'></span></h6>
@@ -149,7 +166,7 @@
 </div>
 
 <!-- Footer -->
-<div class='footer'></div>
+<div class='container footer'></div>
 
 <script src='assets/javascript/api.js'></script>
 <script src='assets/javascript/logic.js'></script>
