@@ -1,5 +1,10 @@
 var weatherMain;
 
+$('.rain').hide();
+$('.snowflakes').hide();
+$('.storm').hide();
+$('.sun').hide();
+
 var makeItRain = function() {
   //clear out everything
   $('.rain').empty();

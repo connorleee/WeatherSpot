@@ -8,8 +8,8 @@ var api = [{
             //Use HTML5 Geolocation API to get the geographical position of a user
 
             if (navigator.geolocation) {
-                console.log(navigator);
-                console.log(navigator.geolocation);
+                // console.log(navigator);
+                // console.log(navigator.geolocation);
 
                 //Use getCurrentPosition() method to return the user's position
                 navigator.geolocation.getCurrentPosition(
@@ -17,7 +17,7 @@ var api = [{
                     //Use position property to get the latitude and longitude of the user's position
 
                     function success(position) {
-                        console.log(position)
+                        // console.log(position)
 
                         //Call openweathermap API and use the two parameters latitude and longitude to retrive city, time and weather data
                         function displayWeatherByGeolocation() {
@@ -31,7 +31,7 @@ var api = [{
                                 method: "GET",
                             }).then(function (weather) {
                                 displayWeatherData(weather);
-                                console.log(weather)
+                                // console.log(weather)
 
                                 api[1].youtubeApi(weatherMain);
                             })
@@ -57,12 +57,12 @@ var api = [{
 
         function displayWeatherData(weather) {
             //console.log(queryURLGeolocation);
-            console.log("displayWeatherData: " + weather)
+            // console.log("displayWeatherData: " + weather)
             //retrieve country name and city name
             var countryNameByGeolocation = weather.sys.country;
-            console.log(countryNameByGeolocation);
+            // console.log(countryNameByGeolocation);
             var cityNameByGeolocation = weather.name;
-            console.log(cityNameByGeolocation);
+            // console.log(cityNameByGeolocation);
 
             //combine city name and country
             var cityAndCountry = cityNameByGeolocation + ", " + countryNameByGeolocation;
@@ -73,17 +73,17 @@ var api = [{
 
             //retrieve weather icon
             var weatherIconID = weather.weather[0].icon;
-            console.log("WeatherIconID: " + weatherIconID);
+            // console.log("WeatherIconID: " + weatherIconID);
             var weatherIconURL = "http://openweathermap.org/img/w/" + weatherIconID + ".png";
-            console.log("weatherIconURL: " + weatherIconURL);
-            var weatherIconImage = $("<img>").attr("src", weatherIconURL)
-            console.log("weatherIconImage: " + weatherIconImage);
+            // console.log("weatherIconURL: " + weatherIconURL);
+            var weatherIconImage = $("<img>").attr("src", weatherIconURL).css('height', '100px')
+            // console.log("weatherIconImage: " + weatherIconImage);
 
             //retrieve temperature
             var currentTemp = weather.main.temp;
-            console.log("currentTemp: " + currentTemp);
+            // console.log("currentTemp: " + currentTemp);
             var currentTempRound = Math.round(currentTemp);
-            console.log("currentTempRound: " + currentTempRound);
+            // console.log("currentTempRound: " + currentTempRound);
             var pCurrentTemp = currentTempRound + " Fahrenheit";
 
 
@@ -95,14 +95,14 @@ var api = [{
 
             //Show current time and data
             var currentTime = moment().format("MMM Do YYYY, hh:mm A")
-            console.log("currentTime: " + currentTime);
+            // console.log("currentTime: " + currentTime);
             var pCurrentTime = currentTime;
 
             //retrieve wind speed data
             var windSpeed = weather.wind.speed;
-            console.log("windSpeed: " + windSpeed);
+            // console.log("windSpeed: " + windSpeed);
             var windSpeedRound = Math.round(windSpeed);
-            console.log("windSpeedRound: " + windSpeedRound);
+            // console.log("windSpeedRound: " + windSpeedRound);
             var pWindSpeed = "Wind speed: " + windSpeedRound + " meter/sec"
 
 
@@ -114,21 +114,21 @@ var api = [{
 
             //retrieve humudity
             var humidity = weather.main.humidity;
-            console.log("humidity: " + humidity);
+            // console.log("humidity: " + humidity);
             var humidityRound = Math.round(humidity);
-            console.log("humidityRoun: " + humidityRound);
+            // console.log("humidityRoun: " + humidityRound);
             var pHumidity = "Humidity: " + humidityRound + "%";
 
             //retrieve sunrise data
             var sunrise = weather.sys.sunrise;
             var sunrisePrettify = moment(sunrise, "X").format("hh:mm A");
-            console.log("sunrisePrettify: " + sunrisePrettify);
+            // console.log("sunrisePrettify: " + sunrisePrettify);
             var pSunrise = "Sunrise: " + sunrisePrettify;
 
             //retrieve sunset data
             var sunset = weather.sys.sunset;
             var sunsetPrettify = moment(sunset, "X").format("hh:mm A");
-            console.log(sunsetPrettify);
+            // console.log(sunsetPrettify);
             var pSunset = "Sunset: " + sunsetPrettify;
 
             //Put the above weather data into html
@@ -140,12 +140,36 @@ var api = [{
             $("#sunsetDiv").text(pSunset);
             $("#weatherIcon").html(weatherIconImage);
             $("#currentDateTime").text(pCurrentTime)
-
+            
+            function determineWeatherAnimation() {
+                if (weatherMain === "Rain") {
+                    $('.rain').show();
+                    makeItRain();
+                } else if (weatherMain === "Snow") {
+                    $('.snowflakes').show();
+                } else if (weatherMain === "Clear") {
+                    $('.sun').show();
+                    console.log("test");
+                } else if (weatherMain === "Thunderstorm") {
+                    $('.rain').show();
+                    $('.storm').show();
+                } else if (weatherMain === "Drizzle") {
+                    $('.rain').show();
+                    makeItRain();
+                }
+                }
+                determineWeatherAnimation();
         }
+
+        
 
         //If user doesn't check "Allow this page to use your location checkbox"， user needs to input the city name or zip code(doesn't allow to submit empty form)
 
         function displayWeatherByCity() {
+            $('.rain').hide();
+            $('.snowflakes').hide();
+            $('.storm').hide();
+            $('.sun').hide();
             var cityName = $(".location").val().trim();
             var APIKey = "78c022ae7b87430bbaabb56f3fd651a0";
 
@@ -174,7 +198,7 @@ var api = [{
     youtubeApi: function (weatherMainReturn) {
         $("#youtubeApp").empty();
 
-        console.log("weatherMainReturn: " + weatherMainReturn)
+        // console.log("weatherMainReturn: " + weatherMainReturn)
 
         var pidDrizzle = "PLuXiwKradYWMuaTv2KlL134p4hqiDjIl3"; /* Acoustic Guitar Instrumentals */
         var pidClouds = "PLKYTmz7SemaqVDF6XJ15bv_8-j7ckkNgb"; /* lo-fi hip hop */
@@ -193,7 +217,7 @@ var api = [{
         else if (weatherMainReturn === "Clouds") { currentWeatherPlaylist = pidClouds }
         else if (weatherMainReturn === "Snow") { currentWeatherPlaylist = pidSnow }
 
-        console.log("current weather playlist: " + currentWeatherPlaylist)
+        // console.log("current weather playlist: " + currentWeatherPlaylist)
 
         var apiKey = "AIzaSyB7sFAVldHcGO73tmAfQk3axlCJaTKQNMk";
         var maxResults = 5;
