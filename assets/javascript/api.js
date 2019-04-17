@@ -153,7 +153,7 @@ var api = [{
                 } else if (weatherMain === "Snow") {
                     $('.snowflakes').show();
                     $('.fog').hide();
-                    $('.rain').show();
+                    $('.rain').hide();
                 } else if (weatherMain === "Clear" || weatherMain === "Sun") {
                     $('.sun').show();
                     $('.rain').hide();
@@ -165,6 +165,7 @@ var api = [{
                 } else if (weatherMain === "Mist" || weatherMain === "Clouds") {
                     $('.fog').show();
                     $('.sun').hide();
+
                 }
                     
                 }
@@ -184,6 +185,8 @@ var api = [{
 
         //Define function displayWeatherForecastData to retrieve retrieve 5 day/3hour forecast weather data from weather api and display weather data in html
         function displayWeatherForecastData(weatherForecast) {
+            console.log(weatherForecast);
+            
 
 
             for (var i = 0; i < weatherForecast.list.length; i++) {
