@@ -5,7 +5,7 @@ $('.snowflakes').hide();
 $('.storm').hide();
 $('.sun').hide();
 
-var makeItRain = function() {
+var makeItRain = function () {
   //clear out everything
   $('.rain').empty();
 
@@ -30,19 +30,28 @@ var makeItRain = function() {
   $('.rain.back-row').append(backDrops);
 }
 
-$('.splat-toggle.toggle').on('click', function() {
+$('.splat-toggle.toggle').on('click', function () {
   $('body').toggleClass('splat-toggle');
   $('.splat-toggle.toggle').toggleClass('active');
   makeItRain();
 });
 
-
+function shuffle(a) {
+  var j, x, i;
+  for (i = a.length - 1; i > 0; i--) {
+    j = Math.floor(Math.random() * (i + 1));
+    x = a[i];
+    a[i] = a[j];
+    a[j] = x;
+  }
+  return a;
+}
 
 makeItRain();
 api[0].weatherApi();
 
 api[1].youtubeApi();
 
-$(document).on('click','.playlistTitle',function() {
+$(document).on('click', '.playlistTitle', function () {
   $('iframe').attr('src', 'https://www.youtube.com/embed/' + $(this).attr('videoID') + "?autoplay=1")
-    })
+})

@@ -220,8 +220,8 @@ var api = [{
         // console.log("current weather playlist: " + currentWeatherPlaylist)
 
         var apiKey = "AIzaSyB7sFAVldHcGO73tmAfQk3axlCJaTKQNMk";
-        var maxResults = 5;
-
+        var maxResults = 50;
+        
         var queryURL = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=" + currentWeatherPlaylist + "&key=" + apiKey + "&maxResults=" + maxResults;
 
         $.ajax({
@@ -234,16 +234,14 @@ var api = [{
             var list = $("<div>").attr("id", "vidList")
             $("#youtubeApp").append(youtubeText).append(list)
 
-            var playlist = response.items;
-            for (let i = 0; i < playlist.length; i++) {
+            var playlist = shuffle(response.items);
+
+            // only return the first 5 songs of shuffled list
+            for (let i = 0; i < 5; i++) {
                 var playlistTitle = playlist[i].snippet.title.split(' ').slice(0, 5).join(' ');
                 var listItems = $("<button>").addClass("playlistTitle btn-hover").attr("videoID", playlist[i].snippet.resourceId.videoId).append(playlistTitle);
                 $("#vidList").append(listItems);
-                // TODO: shuffle the playlistItems. change max results to 100, and store all the playlistItems in an array. shuffle array. append first 5 songs in shuffled array to the DOM.
-            }
-
-            // 
-            
+            }  
         })
     }
 }
