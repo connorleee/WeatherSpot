@@ -8,8 +8,6 @@ var api = [{
             //Use HTML5 Geolocation API to get the geographical position of a user
             $('#youtubePlayer').show();
             if (navigator.geolocation) {
-                // console.log(navigator);
-                // console.log(navigator.geolocation);
 
                 //Use getCurrentPosition() method to return the user's position
                 navigator.geolocation.getCurrentPosition(
@@ -17,7 +15,7 @@ var api = [{
                     //Use position property to get the latitude and longitude of the user's position
 
                     function success(position) {
-                        console.log(position)
+
                         var APIKey = "78c022ae7b87430bbaabb56f3fd651a0"
                         var latitude = position.coords.latitude;
                         var longitude = position.coords.longitude
@@ -32,7 +30,7 @@ var api = [{
                                 method: "GET",
                             }).then(function (weather) {
                                 displayWeatherData(weather);
-                                // console.log(weather)
+
 
                                 api[1].youtubeApi(weatherMain);
                             })
@@ -42,12 +40,12 @@ var api = [{
                         //Call openweathermap API and use the two parameters latitude and longitude to retrive 5 day/3 hour weather forecast data
                         function displayWeatherForecastByGeolocation() {
                             var queryURLGeolocationForWeatherForecase = "https://api.openweathermap.org/data/2.5/forecast?lat=" + latitude + "&lon=" + longitude + "&appid=" + APIKey + "&units=imperial";
-                            console.log(queryURLGeolocationForWeatherForecase);
+
                             $.ajax({
                                 url: queryURLGeolocationForWeatherForecase,
                                 method: "GET",
                             }).then(function (weatherForecast) {
-                                console.log(weatherForecast);
+
                                 displayWeatherForecastData(weatherForecast);
 
                             })
@@ -88,23 +86,23 @@ var api = [{
 
             //retrieve weather icon
             var weatherIconID = weather.weather[0].icon;
-            // console.log("WeatherIconID: " + weatherIconID);
+
             var weatherIconURL = "http://openweathermap.org/img/w/" + weatherIconID + ".png";
-            console.log("weatherIconURL: " + weatherIconURL);
+
             var weatherIconImage = $("<img>").attr("src", weatherIconURL)
 
 
             //retrieve temperature
             var currentTemp = weather.main.temp;
-            // console.log("currentTemp: " + currentTemp);
+
             var currentTempRound = Math.round(currentTemp);
-            // console.log("currentTempRound: " + currentTempRound);
+
             var pCurrentTemp = currentTempRound + "° F";
 
 
             //retrieve main weather condition
             weatherMain = weather.weather[0].main;
-            console.log("weatherMain: " + weatherMain);
+
             var pWeatherMain = weatherMain;
 
 
@@ -113,28 +111,28 @@ var api = [{
 
             //retrieve wind speed data
             var windSpeed = weather.wind.speed;
-            // console.log("windSpeed: " + windSpeed);
+
             var windSpeedRound = Math.round(windSpeed);
-            // console.log("windSpeedRound: " + windSpeedRound);
+
             var pWindSpeed = "Wind speed: " + windSpeedRound + " meter/sec"
 
             //retrieve humudity
             var humidity = weather.main.humidity;
-            // console.log("humidity: " + humidity);
+
             var humidityRound = Math.round(humidity);
-            // console.log("humidityRoun: " + humidityRound);
+
             var pHumidity = "Humidity: " + humidityRound + "%";
 
             //retrieve sunrise data
             var sunrise = weather.sys.sunrise;
             var sunrisePrettify = moment(sunrise, "X").format("hh:mm A");
-            // console.log("sunrisePrettify: " + sunrisePrettify);
+
             var pSunrise = "Sunrise: " + sunrisePrettify;
 
             //retrieve sunset data
             var sunset = weather.sys.sunset;
             var sunsetPrettify = moment(sunset, "X").format("hh:mm A");
-            // console.log(sunsetPrettify);
+
             var pSunset = "Sunset: " + sunsetPrettify;
 
             //Put the above weather data into html
@@ -146,21 +144,27 @@ var api = [{
             $("#sunsetDiv").text(pSunset);
             $("#weatherIcon").html(weatherIconImage);
 
-            $("#currentDateTime").text(pCurrentTime)
             
             function determineWeatherAnimation() {
                 if (weatherMain === "Rain" || weatherMain === "Drizzle") {
                     $('.rain').show();
                     $('.sun').hide();
+                    $('.fog').hide();
                 } else if (weatherMain === "Snow") {
                     $('.snowflakes').show();
+                    $('.fog').hide();
+                    $('.rain').show();
                 } else if (weatherMain === "Clear" || weatherMain === "Sun") {
                     $('.sun').show();
                     $('.rain').hide();
+                    $('.fog').hide();
                 } else if (weatherMain === "Thunderstorm") {
-                    $('.sun').show();
-                } else if (weatherMain === "Mist") {
+                    $('.storm').show();
+                    $('.rain').show();
+                    $('.sun').hide();
+                } else if (weatherMain === "Mist" || weatherMain === "Clouds") {
                     $('.fog').show();
+                    $('.sun').hide();
                 }
                     
                 }
@@ -174,43 +178,43 @@ var api = [{
             setInterval(function(){
                 currentTime = moment().format("MMM Do YYYY, hh:mm A")
                 var pCurrentTime = currentTime;
-                //console.log("currentTime: " + currentTime);
+
                 $("#currentDateTime").text(pCurrentTime)
             }, 60*1000 );
 
         //Define function displayWeatherForecastData to retrieve retrieve 5 day/3hour forecast weather data from weather api and display weather data in html
         function displayWeatherForecastData(weatherForecast) {
-            console.log(weatherForecast);
+
 
             for (var i = 0; i < weatherForecast.list.length; i++) {
                 //retrieve future Date
                 var futureDayOne = moment(weatherForecast.list[i].dt, "X").format("ddd MMM Do");
-                console.log(futureDayOne);
+
 
                 //retrieve future day one at 03:00 AM
 
                 var futureDayOneTimeThree = moment(weatherForecast.list[i].dt, "X").format("hh:mm A");
-                console.log(futureDayOneTimeThree);
+
 
                 //retrieve temperature at future day one at 03:00 AM
 
                 var futureDayOneTimeThreeTemp = weatherForecast.list[i].main.temp;
-                console.log(futureDayOneTimeThreeTemp);
+
 
                 //retrieve weather icon at future day one at 03:00 AM
                 var weatherIconIDForFuture = weatherForecast.list[i].weather[0].icon;
-                console.log(weatherIconIDForFuture);
+
                 var weatherIconURLForFuture = "http://openweathermap.org/img/w/" + weatherIconIDForFuture + ".png";
-                console.log(weatherIconURLForFuture);
+
                 var weatherIconImageForFuture = $("<img>").attr("src", weatherIconURLForFuture);
 
                 //retrieve weather description at future day one at 03:00 AM
                 var weatherDescriptionForFuture = weatherForecast.list[i].weather[0].description;
-                console.log(weatherDescriptionForFuture);
+
 
                 //retrieve humidity at future day one at 03:00 AM
                 var humidityForFuture = weatherForecast.list[i].main.humidity + "%";
-                console.log(humidityForFuture);
+
             }
         }
 
@@ -221,7 +225,7 @@ var api = [{
             var cityName = $(".location").val().trim();
             var APIKey = "78c022ae7b87430bbaabb56f3fd651a0";
             var queryURLCity = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + APIKey + "&units=imperial";
-            console.log(queryURLCity);
+
 
             $.ajax({
                 url: queryURLCity,
@@ -240,13 +244,13 @@ var api = [{
             var cityName = $(".location").val().trim();
             var APIKey = "78c022ae7b87430bbaabb56f3fd651a0";
             var queryURLCityForWeatherForecast = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=" + APIKey;
-            console.log(queryURLCityForWeatherForecast);
+
 
             $.ajax({
                 url: queryURLCityForWeatherForecast,
                 method: "GET",
             }).then(function (weatherForecast) {
-                console.log(weatherForecast);
+
                 displayWeatherForecastData(weatherForecast);
             })
         }
@@ -266,7 +270,6 @@ var api = [{
     youtubeApi: function (weatherMainReturn) {
         $("#youtubeApp").empty();
 
-        // console.log("weatherMainReturn: " + weatherMainReturn)
 
         var pidDrizzle = "PLuXiwKradYWMuaTv2KlL134p4hqiDjIl3"; /* Acoustic Guitar Instrumentals */
         var pidClouds = "PLKYTmz7SemaqVDF6XJ15bv_8-j7ckkNgb"; /* lo-fi hip hop */
@@ -285,7 +288,6 @@ var api = [{
         else if (weatherMainReturn === "Clouds") { currentWeatherPlaylist = pidClouds }
         else if (weatherMainReturn === "Snow") { currentWeatherPlaylist = pidSnow }
 
-        // console.log("current weather playlist: " + currentWeatherPlaylist)
 
         var apiKey = "AIzaSyB7sFAVldHcGO73tmAfQk3axlCJaTKQNMk";
         var maxResults = 5;
@@ -296,7 +298,7 @@ var api = [{
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-            console.log(response.items)
+
 
             var youtubeText = $("<div>").attr("id", "youtubeText").html("<h4>Music Suggestions</h4>");
             var list = $("<div>").attr("id", "vidList")
