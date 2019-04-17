@@ -6,7 +6,7 @@ var api = [{
         //If user check the "Allow this page to use your location checkbox", the page will detect the user's city automatically
         $(":checkbox").on("click", function getLocation() {
             //Use HTML5 Geolocation API to get the geographical position of a user
-
+            $('#youtubePlayer').show();
             if (navigator.geolocation) {
                 // console.log(navigator);
                 // console.log(navigator.geolocation);
@@ -73,11 +73,12 @@ var api = [{
         //Define function displayWeatherData to retrieve current weather data from weather api and display weather data in html
 
         function displayWeatherData(weather) {
+
+            $('#youtubePlayer').show();
+          
             //retrieve country name and city name
             var countryNameByGeolocation = weather.sys.country;
-            // console.log(countryNameByGeolocation);
             var cityNameByGeolocation = weather.name;
-            // console.log(cityNameByGeolocation);
 
             //combine city name and country
             var cityAndCountry = cityNameByGeolocation + ", " + countryNameByGeolocation;
@@ -99,7 +100,7 @@ var api = [{
             // console.log("currentTemp: " + currentTemp);
             var currentTempRound = Math.round(currentTemp);
             // console.log("currentTempRound: " + currentTempRound);
-            var pCurrentTemp = currentTempRound + " Fahrenheit";
+            var pCurrentTemp = currentTempRound + "° F";
 
 
             //retrieve main weather condition
@@ -117,13 +118,6 @@ var api = [{
             var windSpeedRound = Math.round(windSpeed);
             // console.log("windSpeedRound: " + windSpeedRound);
             var pWindSpeed = "Wind speed: " + windSpeedRound + " meter/sec"
-
-
-
-            //retrieve clouds data
-            //var cloudiness = weather.clouds.all;
-            //console.log(cloudiness);
-            //var pCloudiness = $("<p>").text("Cloudiness: " + cloudiness + "%");
 
             //retrieve humudity
             var humidity = weather.main.humidity;
@@ -152,6 +146,27 @@ var api = [{
             $("#sunriseDiv").text(pSunrise);
             $("#sunsetDiv").text(pSunset);
             $("#weatherIcon").html(weatherIconImage);
+
+            $("#currentDateTime").text(pCurrentTime)
+            
+            function determineWeatherAnimation() {
+                if (weatherMain === "Rain" || weatherMain === "Drizzle") {
+                    $('.rain').show();
+                    $('.sun').hide();
+                } else if (weatherMain === "Snow") {
+                    $('.snowflakes').show();
+                } else if (weatherMain === "Clear" || weatherMain === "Sun") {
+                    $('.sun').show();
+                    $('.rain').hide();
+                } else if (weatherMain === "Thunderstorm") {
+                    $('.sun').show();
+                } else if (weatherMain === "Mist") {
+                    $('.fog').show();
+                }
+                    
+                }
+            determineWeatherAnimation();
+        }
 
         }
             //Show current time and data
@@ -219,10 +234,7 @@ var api = [{
         //If user doesn't check "Allow this page to use your location checkbox"， user needs to input the city name(doesn't allow to submit empty form)
 
         function displayWeatherByCity() {
-            $('.rain').hide();
-            $('.snowflakes').hide();
-            $('.storm').hide();
-            $('.sun').hide();
+            $('.location').empty();
             var cityName = $(".location").val().trim();
             var APIKey = "78c022ae7b87430bbaabb56f3fd651a0";
             var queryURLCity = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + APIKey + "&units=imperial";
