@@ -6,7 +6,7 @@ var api = [{
         //If user check the "Allow this page to use your location checkbox", the page will detect the user's city automatically
         $(":checkbox").on("click", function getLocation() {
             //Use HTML5 Geolocation API to get the geographical position of a user
-            $('#youtubePlayer').show();
+            
             if (navigator.geolocation) {
 
                 //Use getCurrentPosition() method to return the user's position
@@ -30,7 +30,7 @@ var api = [{
                                 method: "GET",
                             }).then(function (weather) {
                                 displayWeatherData(weather);
-
+                                $('#youtubePlayer').show();
 
                                 api[1].youtubeApi(weatherMain);
                             })
@@ -150,22 +150,29 @@ var api = [{
                     $('.rain').show();
                     $('.sun').hide();
                     $('.fog').hide();
+                    $('.snowflakes').hide();
                 } else if (weatherMain === "Snow") {
                     $('.snowflakes').show();
                     $('.fog').hide();
                     $('.rain').hide();
+                    $('.sun').hide();
                 } else if (weatherMain === "Clear" || weatherMain === "Sun") {
                     $('.sun').show();
                     $('.rain').hide();
                     $('.fog').hide();
+                    $('.snowflakes').hide();
+
                 } else if (weatherMain === "Thunderstorm") {
                     $('.storm').show();
                     $('.rain').show();
                     $('.sun').hide();
+                    $('.snowflakes').hide();
+
                 } else if (weatherMain === "Mist" || weatherMain === "Clouds") {
                     $('.fog').show();
                     $('.sun').hide();
-
+                    $('.storm').hide();
+                    $('.snowflakes').hide();
                 }
                     
                 }
