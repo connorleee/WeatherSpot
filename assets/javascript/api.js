@@ -6,7 +6,8 @@ var api = [{
         //If user check the "Allow this page to use your location checkbox", the page will detect the user's city automatically
         $(":checkbox").on("click", function getLocation() {
             //Use HTML5 Geolocation API to get the geographical position of a user
-            
+            var elem = document.querySelector('#background');
+                elem.innerHTML = '<img class="background" src="assets/images/seattle.jpg">'
             if (navigator.geolocation) {
 
                 //Use getCurrentPosition() method to return the user's position
@@ -251,6 +252,7 @@ var api = [{
 
         //Display Weather Forecast for 5 day/3 hour by city name
         function displayWeatherForecastByCity() {
+            $('#landing').hide();
             var cityName = $(".location").val().trim();
             var APIKey = "78c022ae7b87430bbaabb56f3fd651a0";
             var queryURLCityForWeatherForecast = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=" + APIKey;
@@ -263,6 +265,16 @@ var api = [{
 
                 displayWeatherForecastData(weatherForecast);
             })
+
+            function showCityBackground(){
+                var elem = document.querySelector('#background');
+                elem.innerHTML = '<img class="background" src="assets/images/'+ cityName + '.jpg" alt="' + cityName + '">'
+                
+                console.log(cityName);
+                
+            } 
+            showCityBackground()
+        
         }
 
         //Adding a click event listener to search button
