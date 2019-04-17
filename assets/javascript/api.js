@@ -276,7 +276,7 @@ var api = [{
 
         var pidDrizzle = "PLuXiwKradYWMuaTv2KlL134p4hqiDjIl3"; /* Acoustic Guitar Instrumentals */
         var pidClouds = "PLKYTmz7SemaqVDF6XJ15bv_8-j7ckkNgb"; /* lo-fi hip hop */
-        var pidSnow = "RD6HckCca2lA8"
+        var pidSnow = "PLBiHiGDiFvmjV_hVEQkFUV2WmD5ubKXxP"; /* Music-Warm Winter Season */
         var pidThunder = "PLsj2E7daicxYNzGv_aFjKhzTsb4wtviz9"; /* Thunderstruck \m/ */
         var pidRain = "PLJzjrheyqoDVnOXyOCluGuBtV0K-8seCC"; /* Rainy Day */
         var pidClear = "PLHOyawPtVknXCyiXycVftCM-8LOICtBp6"; /* Have a great day */
@@ -293,8 +293,8 @@ var api = [{
 
 
         var apiKey = "AIzaSyB7sFAVldHcGO73tmAfQk3axlCJaTKQNMk";
-        var maxResults = 5;
-
+        var maxResults = 50;
+        
         var queryURL = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=" + currentWeatherPlaylist + "&key=" + apiKey + "&maxResults=" + maxResults;
 
         $.ajax({
@@ -307,13 +307,14 @@ var api = [{
             var list = $("<div>").attr("id", "vidList")
             $("#youtubeApp").append(youtubeText).append(list)
 
-            var playlist = response.items;
-            for (let i = 0; i < playlist.length; i++) {
+            var playlist = shuffle(response.items);
+
+            // only return the first 5 songs of shuffled list
+            for (let i = 0; i < 5; i++) {
                 var playlistTitle = playlist[i].snippet.title.split(' ').slice(0, 5).join(' ');
                 var listItems = $("<button>").addClass("playlistTitle btn-hover").attr("videoID", playlist[i].snippet.resourceId.videoId).append(playlistTitle);
                 $("#vidList").append(listItems);
-            }
-            
+            }  
         })
     }
 }
