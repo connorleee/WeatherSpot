@@ -108,7 +108,6 @@ var api = [{
 
             var pWeatherMain = weatherMain;
 
-
             //retrieve wind speed data
             var windSpeed = weather.wind.speed;
 
@@ -143,8 +142,6 @@ var api = [{
             $("#sunriseDiv").text(pSunrise);
             $("#sunsetDiv").text(pSunset);
             $("#weatherIcon").html(weatherIconImage);
-
-
 
         }
 
@@ -204,6 +201,35 @@ var api = [{
         }
         determineWeatherAnimation();
 
+        }
+        //Show current time and data
+        var currentTime = moment().format("MMM Do YYYY, hh:mm A");
+        $("#currentDateTime").text(currentTime);
+
+        setInterval(function () {
+            currentTime = moment().format("MMM Do YYYY, hh:mm A")
+            var pCurrentTime = currentTime;
+
+            $("#currentDateTime").text(pCurrentTime)
+        }, 60 * 1000);
+
+
+        //Define function displayWeatherForecastData to retrieve retrieve 5 day/3hour forecast weather data from weather api and display weather data in html
+        function displayWeatherForecastData(weatherForecast) {
+            $("#accordionEx").empty();
+            var forecastDates;
+            var weatherLength;
+            var forecasthour;
+            var startIndex;
+            
+            for (var d = 0; d < 5; d++) {
+
+                if (d == 0) {
+                    startIndex = 0;
+                    forecastDates = moment(weatherForecast.list[0].dt, "X").format("ddd MMM Do");
+                    forecasthour = moment(weatherForecast.list[0].dt, "X").format("HH");
+                    var forecastTimePointsinNumbers = parseInt(forecasthour);
+
 
         //Define function displayWeatherForecastData to retrieve retrieve 5 day/3hour forecast weather data from weather api and display weather data in html
         function displayWeatherForecastData(weatherForecast) {
@@ -230,15 +256,52 @@ var api = [{
 
                 var weatherIconImageForFuture = $("<img>").attr("src", weatherIconURLForFuture);
 
-                //retrieve weather description at future day one at 03:00 AM
-                var weatherDescriptionForFuture = weatherForecast.list[i].weather[0].description;
+                    weatherLength = (23 - forecastTimePointsinNumbers) / 3 + 1;
+                }
+                else {
+                    startIndex += weatherLength;
+                    forecastDates = moment(weatherForecast.list[startIndex].dt, "X").format("ddd MMM Do");
+                    forecasthour = moment(weatherForecast.list[startIndex].dt, "X").format("HH");
+                    weatherLength = 8;
+                }
+                var cardTemplate =
+                    `<div class="card">
+                <div class="card-header" role="tab" id="headingOne${d}">
+                    <a data-toggle="collapse" data-parent="#accordionEx" href="#collapse${d}"
+                    aria-expanded="true" aria-controls="collapse${d}" id="weather-forecast-date">
+                        <h5 class="mb-0">
+                        ${forecastDates} <i class="fas fa-angle-down rotate-icon"></i>
+                        </h5>
+                    </a>
+                </div>
+                <div id="collapse${d}" class="collapse show" role="tabpanel" aria-labelledby="headingOne${d}"
+                data-parent="#accordionEx">
+                </div>
+            </div>`;
+
+                $("#accordionEx").append(cardTemplate);
+
+                var cardBody = `<div id="body${d}" class="card-body">${forecasthour}</div>`;
+                $("#collapse" + d).append(cardBody);
+
+                for (var i = startIndex; i < startIndex + weatherLength; i++) {
+                    var hour = moment(weatherForecast.list[i].dt, "X").format("HH:mm");
+                    var weatherIconIDForFuture = weatherForecast.list[i].weather[0].icon;
+                    var weatherIconURLForFuture = "http://openweathermap.org/img/w/" + weatherIconIDForFuture + ".png";
+                    var icon = $("<img>").attr("src", weatherIconURLForFuture);
+
+                    var temp = weatherForecast.list[i].main.temp + "° F";
+                    var description = weatherForecast.list[i].weather[0].description;
+                    //var humidityForFuture = weatherForecast.list[i].main.humidity + "%";
+                    $("#body" + d).append(`<p id = "weather-forecast-p", style="color:blue;"> ${hour} ${temp} ${description}</p>`);
 
 
-                //retrieve humidity at future day one at 03:00 AM
-                var humidityForFuture = weatherForecast.list[i].main.humidity + "%";
-
+                }
             }
+
         }
+
+
 
         //If user doesn't check "Allow this page to use your location checkbox"， user needs to input the city name(doesn't allow to submit empty form)
 
@@ -267,7 +330,7 @@ var api = [{
             $('#landing').hide();
             var cityName = $(".location").val().trim();
             var APIKey = "78c022ae7b87430bbaabb56f3fd651a0";
-            var queryURLCityForWeatherForecast = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=" + APIKey;
+            var queryURLCityForWeatherForecast = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=" + APIKey + "&units=imperial";
 
 
             $.ajax({
