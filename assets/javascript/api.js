@@ -235,7 +235,7 @@ var api = [{
                         </h5>
                     </a>
                 </div>
-                <div id="collapse${d}" class="collapse show" role="tabpanel" aria-labelledby="headingOne${d}"
+                <div id="collapse${d}" class="collapse" role="tabpanel" aria-labelledby="headingOne${d}"
                 data-parent="#accordionEx">
                 </div>
             </div>`;
