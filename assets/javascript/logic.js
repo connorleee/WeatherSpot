@@ -54,8 +54,6 @@ function shuffle(a) {
   }
   return a;
 }
-
-//makeItRain();
 api[0].weatherApi();
 
 api[1].youtubeApi();
