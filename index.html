@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang='en'>
+
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <meta http-equiv='X-UA-Compatible' content='ie=edge'>
     <!-- Bootstrap Stylesheet -->
-    <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'>
+    <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'
+        integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'>
+    
     <!-- fonts -->
     <link href='https://fonts.googleapis.com/css?family=Fjalla+One|Oswald' rel='stylesheet'>
     <!-- Main stylesheet -->
@@ -14,10 +17,12 @@
     <title>Weather Spot App</title>
     <!-- jQuery -->
     <script src='https://code.jquery.com/jquery-3.3.1.js'></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
     <!-- Moment js Reference-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 </head>
+
 <body>
     <div>
         <img src='assets/images/seattle.jpg' alt='default' id='landing'>
@@ -25,7 +30,7 @@
     </div>
     <div class='container userLocation'>
         <div class='row'>
-            
+
         </div>
     </div>
     <!-- lightning html -->
@@ -68,9 +73,9 @@
         <div class="snowflake">❅</div>
         <div class="snowflake">❅</div>
     </div>
-</div>
-<!-- end snow html -->
-<!-- sun html -->
+    </div>
+    <!-- end snow html -->
+    <!-- sun html -->
     <div class="sun">
         <div class="ray_box">
             <div class="ray ray1"></div>
@@ -85,97 +90,103 @@
             <div class="ray ray10"></div>
         </div>
     </div>
-<!-- end sun html -->
+    <!-- end sun html -->
 
-<!-- rain html -->
-<div class="rain front-row"></div>
-<div class="rain back-row"></div>
-<div class="toggles"></div>
-<!-- end rain html -->
+    <!-- rain html -->
+    <div class="rain front-row"></div>
+    <div class="rain back-row"></div>
+    <div class="toggles"></div>
+    <!-- end rain html -->
 
-<!-- fog html -->
-<div id="foglayer_01" class="fog">
-    <div class="image01"></div>
-    <div class="image02"></div>
-</div>
-<div id="foglayer_02" class="fog">
-    <div class="image01"></div>
-    <div class="image02"></div>
-</div>  
-<div id="foglayer_03" class="fog">
-    <div class="image01"></div>
-    <div class="image02"></div>
-</div>
+    <!-- fog html -->
+    <div id="foglayer_01" class="fog">
+        <div class="image01"></div>
+        <div class="image02"></div>
+    </div>
+    <div id="foglayer_02" class="fog">
+        <div class="image01"></div>
+        <div class="image02"></div>
+    </div>
+    <div id="foglayer_03" class="fog">
+        <div class="image01"></div>
+        <div class="image02"></div>
+    </div>
 
-<!-- App Header & Current time -->
-<div class='row appHeaderLeft'>
+    <!-- App Header & Current time -->
+    <div class='row appHeaderLeft'>
         <h2 class='col' id='appHeader'>Weather Spot</h2>
-    <div>
-        <h4 class='col'><span id='currentDateTime'></span></h4>
-    </div>
-</div>
-<!-- Current Location, Youtube Player & Right Column Container -->
-<div class='container-fluid'>
-    <div class='row'>
-        <!-- Current Location -->
-        <h1 class='col-md-9' id='currentLocationTitle'>Current Location: <span id='currentLocation'></span></h1>
-        <!-- YouTube Player -->
-        <div class='col-md-3 embed-container'>
-            <iframe id='youtubePlayer' width = "280px" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
+        <div>
+            <h4 class='col'><span id='currentDateTime'></span></h4>
         </div>
     </div>
-
-    <!-- Right Column -->
+    <!-- Current Location, Youtube Player & Right Column Container -->
     <div class='container-fluid'>
-        <div id='rightColumn'>
-            <div class="col-auto">
-                <i class="fas fa-search h4 text-body"></i>
-                <p>Allow this page to use your location <input type="checkbox"></p>
-                <input class="form-control form-control-lg form-control-borderless location" type="search" placeholder="Find Location">
-                <button class="btn btn-sm btn-success submit" type="submit">Search</button>
+        <div class='row'>
+            <!-- Current Location -->
+            <h1 class='col-md-9' id='currentLocationTitle'>Current Location: <span id='currentLocation'></span></h1>
+            <!-- YouTube Player -->
+            <div class='col-md-3 embed-container'>
+                <iframe id='youtubePlayer' width="280px" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
             </div>
-            <div id='scrollableForecast'></div>
+        </div>
+
+        <!-- Right Column -->
+        <div class='container-fluid'>
+            <div id='rightColumn'>
+                <div class="col-auto">
+                    <i class="fas fa-search h4 text-body"></i>
+                    <p>Allow this page to use your location <input type="checkbox"></p>
+                    <input class="form-control form-control-lg form-control-borderless location" type="search"
+                        placeholder="Find Location">
+                    <button class="btn btn-sm btn-success submit" type="submit">Search</button>
+                </div>
+
+                <!--Add Forecast Weather Accordion-->
+                <div class="accordion" id="accordionEx"></div>
+                <!--Completed Forecast Weather Accordion-->
+            
+            </div>
         </div>
     </div>
-</div>
-<!-- Weather Details, Playlist details -->
-<div class='container-fluid'>
-    <div class='row'>
-        <!-- Weather Card - Weather Details -->
-        <div class='col-md-9 container weatherDetails'>
-            <div class="card mainWeatherCard" style="max-width: 302px;">
-                <!-- Heading -->
-                <div class="card-body">
-                    <h2 class="card-title"><span id='temperatureDiv'></span></h2>
+    <!-- Weather Details, Playlist details -->
+    <div class='container-fluid'>
+        <div class='row'>
+            <!-- Weather Card - Weather Details -->
+            <div class='col-md-9 container weatherDetails'>
+                <div class="card mainWeatherCard" style="max-width: 302px;">
+                    <!-- Heading -->
+                    <div class="card-body">
+                        <h2 class="card-title"><span id='temperatureDiv'></span></h2>
 
-                    <h6 class="card-subtitle"><span id='descriptionDiv'></span></h6>
-                    
-                <!-- Image -->
+                        <h6 class="card-subtitle"><span id='descriptionDiv'></span></h6>
+
+                        <!-- Image -->
+                        <div id='weatherIcon'></div>
+                        <h6 class="card-subtitle"><span id='windSpeedDiv'></span></h6>
+                        <h6 class="card-subtitle"><span id='humidityDiv'></span></h6>
+                        <h6 class="card-subtitle"><span id='sunriseDiv'></span></h6>
+                        <h6 class="card-subtitle"><span id='sunsetDiv'></span></h6>
+
+                    </div>
+                    <!-- Image -->
                     <div id='weatherIcon'></div>
-                    <h6 class="card-subtitle"><span id='windSpeedDiv'></span></h6>
-                    <h6 class="card-subtitle"><span id='humidityDiv'></span></h6>
-                    <h6 class="card-subtitle"><span id='sunriseDiv'></span></h6>
-                    <h6 class="card-subtitle"><span id='sunsetDiv'></span></h6>
-
-                </div>
-                <!-- Image -->
-                <div id='weatherIcon'></div>
-                <!-- Text Content -->
-                <div class="card-body">
-                    <p class="card-text"></p>
+                    <!-- Text Content -->
+                    <div class="card-body">
+                        <p class="card-text"></p>
+                    </div>
                 </div>
             </div>
+            <!-- Youtube Playlist -->
+            <div class='col-md-3 embed-container' id='youtubeApp'></div>
         </div>
-        <!-- Youtube Playlist -->
-        <div class='col-md-3 embed-container' id='youtubeApp'></div>
     </div>
-</div>
 
-<!-- Footer -->
-<div class='container footer'></div>
+    <!-- Footer -->
+    <div class='container footer'></div>
 
-<script src='assets/javascript/api.js'></script>
-<script src='assets/javascript/logic.js'></script>
-    
+    <script src='assets/javascript/api.js'></script>
+    <script src='assets/javascript/logic.js'></script>
+
 </body>
+
 </html>
