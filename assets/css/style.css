@@ -665,10 +665,12 @@ body {
     }
   }
   
-/* make the weather forecast div overflow */
-#accordionEx{
 
+  /* make the weather forecast div overflow */
+  #accordionEx{
+   
     height: 500px;
     overflow: auto;
- 
+   
   }
+
