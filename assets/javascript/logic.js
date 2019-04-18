@@ -55,7 +55,6 @@ function shuffle(a) {
   return a;
 }
 api[0].weatherApi();
-
 api[1].youtubeApi();
 
 $(document).on('click', '.playlistTitle', function () {
