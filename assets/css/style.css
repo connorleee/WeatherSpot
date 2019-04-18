@@ -19,6 +19,19 @@
     padding-right: 35px;
     padding-top: 15px;
 }
+
+.col-auto {
+    padding-left:10px;
+    padding-right: 10px;
+}
+
+#buttonID {
+    background: #30dd8a;
+    width: 15px;
+    height: 15px;
+    border-radius: 20%
+}
+
 .background, #landing {
     position: absolute;
     top: 0;
