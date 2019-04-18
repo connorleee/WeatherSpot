@@ -309,9 +309,6 @@ var api = [{
 
         }
 
-
-
-
         //Adding a click event listener to search button
         //$(document).on("click", ".submit", displayWeatherByCity);
         $(".submit").on("click", function () {
