@@ -194,13 +194,16 @@ var api = [{
 
         //Define function displayWeatherForecastData to retrieve retrieve 5 day/3hour forecast weather data from weather api and display weather data in html
         function displayWeatherForecastData(weatherForecast) {
-            $("#accordionEx").empty();
+            $("#accordionEx").empty();        
             var forecastDates;
             var weatherLength;
             var forecasthour;
             var startIndex;
             
             for (var d = 0; d < 5; d++) {
+               
+                
+                
 
                 if (d == 0) {
                     startIndex = 0;
@@ -217,7 +220,7 @@ var api = [{
                     weatherLength = 8;
                 }
                 var cardTemplate =
-                    `<div class="card">
+                    `<div class="card" id="weather-forecast-card">
                 <div class="card-header" role="tab" id="headingOne${d}">
                     <a data-toggle="collapse" data-parent="#accordionEx" href="#collapse${d}"
                     aria-expanded="true" aria-controls="collapse${d}" id="weather-forecast-date">
