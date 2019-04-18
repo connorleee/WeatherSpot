@@ -4,10 +4,10 @@ var api = [{
     // Weather API Call
     weatherApi: function () {
         //If user check the "Allow this page to use your location checkbox", the page will detect the user's city automatically
-        $(":checkbox").on("click", function getLocation() {
+        $("#buttonID").on("click", function getLocation() {
             //Use HTML5 Geolocation API to get the geographical position of a user
             var elem = document.querySelector('#background');
-                elem.innerHTML = '<img class="background" src="assets/images/seattle.jpg">'
+            elem.innerHTML = '<img class="background" src="assets/images/seattle.jpg">'
             if (navigator.geolocation) {
 
                 //Use getCurrentPosition() method to return the user's position
@@ -31,6 +31,7 @@ var api = [{
                                 method: "GET",
                             }).then(function (weather) {
                                 displayWeatherData(weather);
+                                timeZone(weather);
                                 $('#youtubePlayer').show();
 
                                 api[1].youtubeApi(weatherMain);
@@ -66,6 +67,7 @@ var api = [{
                 //geolocation is not supported 
                 alert("Geolocation is not supported by this browser, please input your city name in the search box!")
             }
+
         })
 
         //Define function displayWeatherData to retrieve current weather data from weather api and display weather data in html
@@ -106,10 +108,6 @@ var api = [{
 
             var pWeatherMain = weatherMain;
 
-
-
-
-
             //retrieve wind speed data
             var windSpeed = weather.wind.speed;
 
@@ -145,39 +143,63 @@ var api = [{
             $("#sunsetDiv").text(pSunset);
             $("#weatherIcon").html(weatherIconImage);
 
+        }
 
-            function determineWeatherAnimation() {
-                if (weatherMain === "Rain" || weatherMain === "Drizzle") {
-                    $('.rain').show();
-                    $('.sun').hide();
-                    $('.fog').hide();
-                    $('.snowflakes').hide();
-                } else if (weatherMain === "Snow") {
-                    $('.snowflakes').show();
-                    $('.fog').hide();
-                    $('.rain').hide();
-                    $('.sun').hide();
-                } else if (weatherMain === "Clear" || weatherMain === "Sun") {
-                    $('.sun').show();
-                    $('.rain').hide();
-                    $('.fog').hide();
-                    $('.snowflakes').hide();
+        function timeZone(weather) {
 
-                } else if (weatherMain === "Thunderstorm") {
-                    $('.storm').show();
-                    $('.rain').show();
-                    $('.sun').hide();
-                    $('.snowflakes').hide();
+            var lat = weather.coord.lat;
+            var lon = weather.coord.lon;
 
-                } else if (weatherMain === "Mist" || weatherMain === "Clouds") {
-                    $('.fog').show();
-                    $('.sun').hide();
-                    $('.storm').hide();
-                    $('.snowflakes').hide();
-                }
+            $.ajax({
+                url: "https://maps.googleapis.com/maps/api/timezone/json?location=" + lat + "," + lon + "&key=AIzaSyAz5PoWXceWmVdDEsy4odPgaJvCZMO9jLY&timestamp=" + (Math.round((new Date().getTime()) / 1000)).toString(),
+            })
+                .done(function (response) {
+                    var timeZoneId = response.timeZoneId;
+                    var currentTime = moment().tz(timeZoneId).format("MMM Do YYYY, hh:mm A")
+                    $("#currentDateTime").text(currentTime);
 
+                    setInterval(function () {
+                        currentTime = moment().tz(timeZoneId).format("MMM Do YYYY, hh:mm A")
+                        var pCurrentTime = currentTime;
+
+                        $("#currentDateTime").text(pCurrentTime)
+                    }, 60 * 1000);
+
+                });
+        }
+
+        function determineWeatherAnimation() {
+            if (weatherMain === "Rain" || weatherMain === "Drizzle") {
+                $('.rain').show();
+                $('.sun').hide();
+                $('.fog').hide();
+                $('.snowflakes').hide();
+            } else if (weatherMain === "Snow") {
+                $('.snowflakes').show();
+                $('.fog').hide();
+                $('.rain').hide();
+                $('.sun').hide();
+            } else if (weatherMain === "Clear" || weatherMain === "Sun") {
+                $('.sun').show();
+                $('.rain').hide();
+                $('.fog').hide();
+                $('.snowflakes').hide();
+
+            } else if (weatherMain === "Thunderstorm") {
+                $('.storm').show();
+                $('.rain').show();
+                $('.sun').hide();
+                $('.snowflakes').hide();
+
+            } else if (weatherMain === "Mist" || weatherMain === "Clouds") {
+                $('.fog').show();
+                $('.sun').hide();
+                $('.storm').hide();
+                $('.snowflakes').hide();
             }
-            determineWeatherAnimation();
+            
+        }
+        determineWeatherAnimation();
 
         }
         //Show current time and data
@@ -210,6 +232,32 @@ var api = [{
                     forecastDates = moment(weatherForecast.list[0].dt, "X").format("ddd MMM Do");
                     forecasthour = moment(weatherForecast.list[0].dt, "X").format("HH");
                     var forecastTimePointsinNumbers = parseInt(forecasthour);
+
+
+        //Define function displayWeatherForecastData to retrieve retrieve 5 day/3hour forecast weather data from weather api and display weather data in html
+        function displayWeatherForecastData(weatherForecast) {
+
+            for (var i = 0; i < weatherForecast.list.length; i++) {
+                //retrieve future Date
+                var futureDayOne = moment(weatherForecast.list[i].dt, "X").format("ddd MMM Do");
+
+
+                //retrieve future day one at 03:00 AM
+
+                var futureDayOneTimeThree = moment(weatherForecast.list[i].dt, "X").format("hh:mm A");
+
+
+                //retrieve temperature at future day one at 03:00 AM
+
+                var futureDayOneTimeThreeTemp = weatherForecast.list[i].main.temp;
+
+
+                //retrieve weather icon at future day one at 03:00 AM
+                var weatherIconIDForFuture = weatherForecast.list[i].weather[0].icon;
+
+                var weatherIconURLForFuture = "http://openweathermap.org/img/w/" + weatherIconIDForFuture + ".png";
+
+                var weatherIconImageForFuture = $("<img>").attr("src", weatherIconURLForFuture);
 
                     weatherLength = (23 - forecastTimePointsinNumbers) / 3 + 1;
                 }
@@ -250,6 +298,7 @@ var api = [{
                     //var humidityForFuture = weatherForecast.list[i].main.humidity + "%";
                     $("#body" + d).append(`<p id = "weather-forecast-p", style="color:blue;"> ${hour} ${temp} ${description}</p>`);
 
+
                 }
             }
 
@@ -271,9 +320,10 @@ var api = [{
                 method: "GET",
             }).then(function (weather) {
                 displayWeatherData(weather);
-
+                timeZone(weather);
                 // calls the youtube API 
                 api[1].youtubeApi(weatherMain);
+
             })
 
         }
@@ -294,26 +344,31 @@ var api = [{
                 displayWeatherForecastData(weatherForecast);
             })
 
-            function showCityBackground(){
+            function showCityBackground() {
                 var elem = document.querySelector('#background');
-                elem.innerHTML = '<img class="background" src="assets/images/'+ cityName + '.jpg" alt="' + cityName + '">'
-                
+                elem.innerHTML = '<img class="background" src="assets/images/' + cityName + '.jpg" alt="' + cityName + '">'
+
                 console.log(cityName);
-                
-            } 
+
+            }
             showCityBackground()
-        
+
         }
+
+
+
 
         //Adding a click event listener to search button
         //$(document).on("click", ".submit", displayWeatherByCity);
         $(".submit").on("click", function () {
+
             displayWeatherByCity();
             displayWeatherForecastByCity();
         })
 
     }
 },
+
 
 // Youtube API Call
 {
