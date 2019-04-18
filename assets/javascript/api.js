@@ -7,7 +7,7 @@ var api = [{
         $(":checkbox").on("click", function getLocation() {
             //Use HTML5 Geolocation API to get the geographical position of a user
             var elem = document.querySelector('#background');
-            elem.innerHTML = '<img class="background" src="assets/images/seattle.jpg">'
+                elem.innerHTML = '<img class="background" src="assets/images/seattle.jpg">'
             if (navigator.geolocation) {
 
                 //Use getCurrentPosition() method to return the user's position
@@ -199,7 +199,7 @@ var api = [{
             var weatherLength;
             var forecasthour;
             var startIndex;
-
+            
             for (var d = 0; d < 5; d++) {
 
                 if (d == 0) {
@@ -220,7 +220,7 @@ var api = [{
                     `<div class="card">
                 <div class="card-header" role="tab" id="headingOne${d}">
                     <a data-toggle="collapse" data-parent="#accordionEx" href="#collapse${d}"
-                    aria-expanded="false" aria-controls="collapse${d}" id="weather-forecast-date">
+                    aria-expanded="true" aria-controls="collapse${d}" id="weather-forecast-date">
                         <h5 class="mb-0">
                         ${forecastDates} <i class="fas fa-angle-down rotate-icon"></i>
                         </h5>
@@ -291,15 +291,15 @@ var api = [{
                 displayWeatherForecastData(weatherForecast);
             })
 
-            function showCityBackground() {
+            function showCityBackground(){
                 var elem = document.querySelector('#background');
-                elem.innerHTML = '<img class="background" src="assets/images/' + cityName + '.jpg" alt="' + cityName + '">'
-
+                elem.innerHTML = '<img class="background" src="assets/images/'+ cityName + '.jpg" alt="' + cityName + '">'
+                
                 console.log(cityName);
-
-            }
+                
+            } 
             showCityBackground()
-
+        
         }
 
         //Adding a click event listener to search button
@@ -363,4 +363,3 @@ var api = [{
     }
 }
 ]
-
