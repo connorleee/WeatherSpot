@@ -1,13 +1,12 @@
-
 // Global weather declaration in order to use it cross script/method
 var api = [{
     // Weather API Call
     weatherApi: function () {
         //If user check the "Allow this page to use your location checkbox", the page will detect the user's city automatically
-        $(":checkbox").on("click", function getLocation() {
+        $("#buttonID").on("click", function getLocation() {
             //Use HTML5 Geolocation API to get the geographical position of a user
             var elem = document.querySelector('#background');
-                elem.innerHTML = '<img class="background" src="assets/images/seattle.jpg">'
+            elem.innerHTML = '<img class="background" src="assets/images/seattle.jpg">'
             if (navigator.geolocation) {
 
                 //Use getCurrentPosition() method to return the user's position
@@ -31,6 +30,7 @@ var api = [{
                                 method: "GET",
                             }).then(function (weather) {
                                 displayWeatherData(weather);
+                                timeZone(weather);
                                 $('#youtubePlayer').show();
 
                                 api[1].youtubeApi(weatherMain);
@@ -66,6 +66,7 @@ var api = [{
                 //geolocation is not supported 
                 alert("Geolocation is not supported by this browser, please input your city name in the search box!")
             }
+
         })
 
         //Define function displayWeatherData to retrieve current weather data from weather api and display weather data in html
@@ -105,10 +106,6 @@ var api = [{
             weatherMain = weather.weather[0].main;
 
             var pWeatherMain = weatherMain;
-
-
-
-
 
             //retrieve wind speed data
             var windSpeed = weather.wind.speed;
@@ -180,17 +177,29 @@ var api = [{
             determineWeatherAnimation();
 
         }
-        //Show current time and data
-        var currentTime = moment().format("MMM Do YYYY, hh:mm A");
-        $("#currentDateTime").text(currentTime);
 
-        setInterval(function () {
-            currentTime = moment().format("MMM Do YYYY, hh:mm A")
-            var pCurrentTime = currentTime;
+        function timeZone(weather) {
 
-            $("#currentDateTime").text(pCurrentTime)
-        }, 60 * 1000);
+            var lat = weather.coord.lat;
+            var lon = weather.coord.lon;
 
+            $.ajax({
+                url: "https://maps.googleapis.com/maps/api/timezone/json?location=" + lat + "," + lon + "&key=AIzaSyAz5PoWXceWmVdDEsy4odPgaJvCZMO9jLY&timestamp=" + (Math.round((new Date().getTime()) / 1000)).toString(),
+            })
+                .done(function (response) {
+                    var timeZoneId = response.timeZoneId;
+                    var currentTime = moment().tz(timeZoneId).format("MMM Do YYYY, hh:mm A")
+                    $("#currentDateTime").text(currentTime);
+
+                    setInterval(function () {
+                        currentTime = moment().tz(timeZoneId).format("MMM Do YYYY, hh:mm A")
+                        var pCurrentTime = currentTime;
+
+                        $("#currentDateTime").text(pCurrentTime)
+                    }, 60 * 1000);
+
+                });
+        }
 
         //Define function displayWeatherForecastData to retrieve retrieve 5 day/3hour forecast weather data from weather api and display weather data in html
         function displayWeatherForecastData(weatherForecast) {
@@ -199,7 +208,7 @@ var api = [{
             var weatherLength;
             var forecasthour;
             var startIndex;
-            
+
             for (var d = 0; d < 5; d++) {
 
                 if (d == 0) {
@@ -253,7 +262,6 @@ var api = [{
         }
 
 
-
         //If user doesn't check "Allow this page to use your location checkbox"， user needs to input the city name(doesn't allow to submit empty form)
 
         function displayWeatherByCity() {
@@ -268,9 +276,10 @@ var api = [{
                 method: "GET",
             }).then(function (weather) {
                 displayWeatherData(weather);
-
+                timeZone(weather);
                 // calls the youtube API 
                 api[1].youtubeApi(weatherMain);
+
             })
 
         }
@@ -291,15 +300,13 @@ var api = [{
                 displayWeatherForecastData(weatherForecast);
             })
 
-            function showCityBackground(){
+            function showCityBackground() {
                 var elem = document.querySelector('#background');
-                elem.innerHTML = '<img class="background" src="assets/images/'+ cityName + '.jpg" alt="' + cityName + '">'
-                
-                console.log(cityName);
-                
-            } 
+                elem.innerHTML = '<img class="background" src="assets/images/' + cityName + '.jpg" alt="' + cityName + '">'
+
+            }
             showCityBackground()
-        
+
         }
 
         //Adding a click event listener to search button
@@ -311,6 +318,7 @@ var api = [{
 
     }
 },
+
 
 // Youtube API Call
 {
@@ -363,3 +371,4 @@ var api = [{
     }
 }
 ]
+
