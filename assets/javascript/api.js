@@ -1,4 +1,3 @@
-
 // Global weather declaration in order to use it cross script/method
 var api = [{
     // Weather API Call
@@ -143,6 +142,40 @@ var api = [{
             $("#sunsetDiv").text(pSunset);
             $("#weatherIcon").html(weatherIconImage);
 
+
+            function determineWeatherAnimation() {
+                if (weatherMain === "Rain" || weatherMain === "Drizzle") {
+                    $('.rain').show();
+                    $('.sun').hide();
+                    $('.fog').hide();
+                    $('.snowflakes').hide();
+                } else if (weatherMain === "Snow") {
+                    $('.snowflakes').show();
+                    $('.fog').hide();
+                    $('.rain').hide();
+                    $('.sun').hide();
+                } else if (weatherMain === "Clear" || weatherMain === "Sun") {
+                    $('.sun').show();
+                    $('.rain').hide();
+                    $('.fog').hide();
+                    $('.snowflakes').hide();
+
+                } else if (weatherMain === "Thunderstorm") {
+                    $('.storm').show();
+                    $('.rain').show();
+                    $('.sun').hide();
+                    $('.snowflakes').hide();
+
+                } else if (weatherMain === "Mist" || weatherMain === "Clouds") {
+                    $('.fog').show();
+                    $('.sun').hide();
+                    $('.storm').hide();
+                    $('.snowflakes').hide();
+                }
+
+            }
+            determineWeatherAnimation();
+
         }
 
         function timeZone(weather) {
@@ -168,52 +201,6 @@ var api = [{
                 });
         }
 
-        function determineWeatherAnimation() {
-            if (weatherMain === "Rain" || weatherMain === "Drizzle") {
-                $('.rain').show();
-                $('.sun').hide();
-                $('.fog').hide();
-                $('.snowflakes').hide();
-            } else if (weatherMain === "Snow") {
-                $('.snowflakes').show();
-                $('.fog').hide();
-                $('.rain').hide();
-                $('.sun').hide();
-            } else if (weatherMain === "Clear" || weatherMain === "Sun") {
-                $('.sun').show();
-                $('.rain').hide();
-                $('.fog').hide();
-                $('.snowflakes').hide();
-
-            } else if (weatherMain === "Thunderstorm") {
-                $('.storm').show();
-                $('.rain').show();
-                $('.sun').hide();
-                $('.snowflakes').hide();
-
-            } else if (weatherMain === "Mist" || weatherMain === "Clouds") {
-                $('.fog').show();
-                $('.sun').hide();
-                $('.storm').hide();
-                $('.snowflakes').hide();
-            }
-            
-        }
-        determineWeatherAnimation();
-
-        }
-        //Show current time and data
-        var currentTime = moment().format("MMM Do YYYY, hh:mm A");
-        $("#currentDateTime").text(currentTime);
-
-        setInterval(function () {
-            currentTime = moment().format("MMM Do YYYY, hh:mm A")
-            var pCurrentTime = currentTime;
-
-            $("#currentDateTime").text(pCurrentTime)
-        }, 60 * 1000);
-
-
         //Define function displayWeatherForecastData to retrieve retrieve 5 day/3hour forecast weather data from weather api and display weather data in html
         function displayWeatherForecastData(weatherForecast) {
             $("#accordionEx").empty();
@@ -221,7 +208,7 @@ var api = [{
             var weatherLength;
             var forecasthour;
             var startIndex;
-            
+
             for (var d = 0; d < 5; d++) {
 
                 if (d == 0) {
@@ -229,32 +216,6 @@ var api = [{
                     forecastDates = moment(weatherForecast.list[0].dt, "X").format("ddd MMM Do");
                     forecasthour = moment(weatherForecast.list[0].dt, "X").format("HH");
                     var forecastTimePointsinNumbers = parseInt(forecasthour);
-
-
-        //Define function displayWeatherForecastData to retrieve retrieve 5 day/3hour forecast weather data from weather api and display weather data in html
-        function displayWeatherForecastData(weatherForecast) {
-
-            for (var i = 0; i < weatherForecast.list.length; i++) {
-                //retrieve future Date
-                var futureDayOne = moment(weatherForecast.list[i].dt, "X").format("ddd MMM Do");
-
-
-                //retrieve future day one at 03:00 AM
-
-                var futureDayOneTimeThree = moment(weatherForecast.list[i].dt, "X").format("hh:mm A");
-
-
-                //retrieve temperature at future day one at 03:00 AM
-
-                var futureDayOneTimeThreeTemp = weatherForecast.list[i].main.temp;
-
-
-                //retrieve weather icon at future day one at 03:00 AM
-                var weatherIconIDForFuture = weatherForecast.list[i].weather[0].icon;
-
-                var weatherIconURLForFuture = "http://openweathermap.org/img/w/" + weatherIconIDForFuture + ".png";
-
-                var weatherIconImageForFuture = $("<img>").attr("src", weatherIconURLForFuture);
 
                     weatherLength = (23 - forecastTimePointsinNumbers) / 3 + 1;
                 }
@@ -295,12 +256,10 @@ var api = [{
                     //var humidityForFuture = weatherForecast.list[i].main.humidity + "%";
                     $("#body" + d).append(`<p id = "weather-forecast-p", style="color:blue;"> ${hour} ${temp} ${description}</p>`);
 
-
                 }
             }
 
         }
-
 
 
         //If user doesn't check "Allow this page to use your location checkbox"， user needs to input the city name(doesn't allow to submit empty form)
@@ -345,20 +304,14 @@ var api = [{
                 var elem = document.querySelector('#background');
                 elem.innerHTML = '<img class="background" src="assets/images/' + cityName + '.jpg" alt="' + cityName + '">'
 
-                console.log(cityName);
-
             }
             showCityBackground()
 
         }
 
-
-
-
         //Adding a click event listener to search button
         //$(document).on("click", ".submit", displayWeatherByCity);
         $(".submit").on("click", function () {
-
             displayWeatherByCity();
             displayWeatherForecastByCity();
         })
