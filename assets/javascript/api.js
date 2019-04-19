@@ -144,33 +144,40 @@ var api = [{
 
 
             function determineWeatherAnimation() {
+                var elem = document.querySelector('#background');
+                elem.innerHTML = '<img class="background" src="assets/images/' + weatherMain + '.jpg" alt="' + weatherMain + '">'
+
                 if (weatherMain === "Rain" || weatherMain === "Drizzle") {
                     $('.rain').show();
                     $('.sun').hide();
                     $('.fog').hide();
                     $('.snowflakes').hide();
+                    $('#landing').hide();  
                 } else if (weatherMain === "Snow") {
                     $('.snowflakes').show();
                     $('.fog').hide();
                     $('.rain').hide();
                     $('.sun').hide();
+                    $('#landing').hide();
                 } else if (weatherMain === "Clear" || weatherMain === "Sun") {
                     $('.sun').show();
                     $('.rain').hide();
                     $('.fog').hide();
                     $('.snowflakes').hide();
-
+                    $('#landing').hide();
                 } else if (weatherMain === "Thunderstorm") {
                     $('.storm').show();
                     $('.rain').show();
                     $('.sun').hide();
                     $('.snowflakes').hide();
-
+                    $('#landing').hide();
                 } else if (weatherMain === "Mist" || weatherMain === "Clouds") {
                     $('.fog').show();
                     $('.sun').hide();
                     $('.storm').hide();
                     $('.snowflakes').hide();
+                    $('.rain').hide();
+                    $('#landing').hide();
                 }
 
             }
@@ -301,12 +308,12 @@ var api = [{
                 displayWeatherForecastData(weatherForecast);
             })
 
-            function showCityBackground() {
-                var elem = document.querySelector('#background');
-                elem.innerHTML = '<img class="background" src="assets/images/' + cityName + '.jpg" alt="' + cityName + '">'
+            // function showCityBackground() {
+            //     var elem = document.querySelector('#background');
+            //     elem.innerHTML = '<img class="background" src="assets/images/' + cityName + '.jpg" alt="' + cityName + '">'
 
-            }
-            showCityBackground()
+            // }
+            // showCityBackground()
 
         }
 
