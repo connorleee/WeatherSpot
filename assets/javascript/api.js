@@ -203,6 +203,7 @@ var api = [{
 
         //Define function displayWeatherForecastData to retrieve retrieve 5 day/3hour forecast weather data from weather api and display weather data in html
         function displayWeatherForecastData(weatherForecast) {
+            console.log(weatherForecast);
             $("#accordionEx").empty();
             var forecastDates;
             var weatherLength;
