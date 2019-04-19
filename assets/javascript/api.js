@@ -345,12 +345,12 @@ var api = [{
 
         var currentWeatherPlaylist;
         // conditionals to insert current weather into query
-        if (weatherMainReturn === "Rain") { currentWeatherPlaylist = pidRain }
-        else if (weatherMainReturn === "Clear") { currentWeatherPlaylist = pidClear }
-        else if (weatherMainReturn === "Thunderstorm") { currentWeatherPlaylist = pidThunder }
-        else if (weatherMainReturn === "Drizzle") { currentWeatherPlaylist = pidDrizzle }
-        else if (weatherMainReturn === "Clouds") { currentWeatherPlaylist = pidClouds }
-        else if (weatherMainReturn === "Snow") { currentWeatherPlaylist = pidSnow }
+        if (weatherMainReturn === "rain") { currentWeatherPlaylist = pidRain }
+        else if (weatherMainReturn === "clear") { currentWeatherPlaylist = pidClear }
+        else if (weatherMainReturn === "thunderstorm") { currentWeatherPlaylist = pidThunder }
+        else if (weatherMainReturn === "drizzle") { currentWeatherPlaylist = pidDrizzle }
+        else if (weatherMainReturn === "clouds") { currentWeatherPlaylist = pidClouds }
+        else if (weatherMainReturn === "snow") { currentWeatherPlaylist = pidSnow }
 
 
         var apiKey = "AIzaSyB7sFAVldHcGO73tmAfQk3axlCJaTKQNMk";
