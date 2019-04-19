@@ -149,31 +149,31 @@ var api = [{
                 var elem = document.querySelector('#background');
                 elem.innerHTML = '<img class="background" src="assets/images/' + weatherMain + '.jpg" alt="' + weatherMain + '">'
 
-                if (weatherMain === "Rain" || weatherMain === "Drizzle") {
+                if (weatherMain === "rain" || weatherMain === "drizzle") {
                     $('.rain').show();
                     $('.sun').hide();
                     $('.fog').hide();
                     $('.snowflakes').hide();
                     $('#landing').hide();  
-                } else if (weatherMain === "Snow") {
+                } else if (weatherMain === "snow") {
                     $('.snowflakes').show();
                     $('.fog').hide();
                     $('.rain').hide();
                     $('.sun').hide();
                     $('#landing').hide();
-                } else if (weatherMain === "Clear" || weatherMain === "Sun") {
+                } else if (weatherMain === "clear" || weatherMain === "sun") {
                     $('.sun').show();
                     $('.rain').hide();
                     $('.fog').hide();
                     $('.snowflakes').hide();
                     $('#landing').hide();
-                } else if (weatherMain === "Thunderstorm") {
+                } else if (weatherMain === "thunderstorm") {
                     $('.storm').show();
                     $('.rain').show();
                     $('.sun').hide();
                     $('.snowflakes').hide();
                     $('#landing').hide();
-                } else if (weatherMain === "Mist" || weatherMain === "Clouds") {
+                } else if (weatherMain === "mist" || weatherMain === "clouds") {
                     $('.fog').show();
                     $('.sun').hide();
                     $('.storm').hide();
