@@ -89,7 +89,7 @@ var api = [{
             //retrieve weather icon
             var weatherIconID = weather.weather[0].icon;
 
-            var weatherIconURL = "http://openweathermap.org/img/w/" + weatherIconID + ".png";
+            var weatherIconURL = "https://openweathermap.org/img/w/" + weatherIconID + ".png";
 
             var weatherIconImage = $("<img>").attr("src", weatherIconURL)
 
@@ -103,7 +103,9 @@ var api = [{
 
 
             //retrieve main weather condition
-            weatherMain = weather.weather[0].main;
+            weatherMain = weather.weather[0].main.toLowerCase().trim();
+            console.log(weatherMain);
+            
 
             var pWeatherMain = weatherMain;
 
@@ -147,31 +149,31 @@ var api = [{
                 var elem = document.querySelector('#background');
                 elem.innerHTML = '<img class="background" src="assets/images/' + weatherMain + '.jpg" alt="' + weatherMain + '">'
 
-                if (weatherMain === "Rain" || weatherMain === "Drizzle") {
+                if (weatherMain === "rain" || weatherMain === "drizzle") {
                     $('.rain').show();
                     $('.sun').hide();
                     $('.fog').hide();
                     $('.snowflakes').hide();
                     $('#landing').hide();  
-                } else if (weatherMain === "Snow") {
+                } else if (weatherMain === "snow") {
                     $('.snowflakes').show();
                     $('.fog').hide();
                     $('.rain').hide();
                     $('.sun').hide();
                     $('#landing').hide();
-                } else if (weatherMain === "Clear" || weatherMain === "Sun") {
+                } else if (weatherMain === "clear" || weatherMain === "sun") {
                     $('.sun').show();
                     $('.rain').hide();
                     $('.fog').hide();
                     $('.snowflakes').hide();
                     $('#landing').hide();
-                } else if (weatherMain === "Thunderstorm") {
+                } else if (weatherMain === "thunderstorm") {
                     $('.storm').show();
                     $('.rain').show();
                     $('.sun').hide();
                     $('.snowflakes').hide();
                     $('#landing').hide();
-                } else if (weatherMain === "Mist" || weatherMain === "Clouds") {
+                } else if (weatherMain === "mist" || weatherMain === "clouds") {
                     $('.fog').show();
                     $('.sun').hide();
                     $('.storm').hide();
@@ -256,7 +258,7 @@ var api = [{
                 for (var i = startIndex; i < startIndex + weatherLength; i++) {
                     var hour = moment(weatherForecast.list[i].dt, "X").format("HH:mm");
                     var weatherIconIDForFuture = weatherForecast.list[i].weather[0].icon;
-                    var weatherIconURLForFuture = "http://openweathermap.org/img/w/" + weatherIconIDForFuture + ".png";
+                    var weatherIconURLForFuture = "https://openweathermap.org/img/w/" + weatherIconIDForFuture + ".png";
                     var icon = $("<img>").attr("src", weatherIconURLForFuture);
 
                     var temp = weatherForecast.list[i].main.temp + "° F";
