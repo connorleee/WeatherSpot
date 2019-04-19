@@ -145,14 +145,14 @@ var api = [{
 
             function determineWeatherAnimation() {
                 var elem = document.querySelector('#background');
-                elem.innerHTML = '<img class="background" src="assets/images/' + weatherMain + '.jpg" alt="' + weatherMain + '">'
+                elem.innerHTML = '<img class="background" src="/assets/images/' + weatherMain + '.jpg" alt="' + weatherMain + '">'
 
                 if (weatherMain === "Rain" || weatherMain === "Drizzle") {
                     $('.rain').show();
                     $('.sun').hide();
                     $('.fog').hide();
                     $('.snowflakes').hide();
-                    $('#landing').hide();
+                    $('#landing').hide();  
                 } else if (weatherMain === "Snow") {
                     $('.snowflakes').show();
                     $('.fog').hide();
