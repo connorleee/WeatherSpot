@@ -103,7 +103,9 @@ var api = [{
 
 
             //retrieve main weather condition
-            weatherMain = weather.weather[0].main;
+            weatherMain = weather.weather[0].main.toLowerCase().trim();
+            console.log(weatherMain);
+            
 
             var pWeatherMain = weatherMain;
 
