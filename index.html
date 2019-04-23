@@ -39,70 +39,6 @@
         </div>
     </div>
 
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Main screen -->
-            <div class="col-md-10">
-                <div class="row">
-                    <!-- Title, weather info -->
-                    <div class="col-md-6">
-                        <!-- Title -->
-                        <div class="row">
-                            
-                        </div>
-
-                        <!-- Location -->
-                        <div class="row">
-
-                        </div>
-
-                        <!-- Weather data -->
-                        <div class="row">
-
-                        </div>
-                    </div>
-
-                    <!-- Media column -->
-                    <div class="col-md-6">
-                        <!-- Time -->
-                        <div class="row">
-
-                        </div>
-
-                        <!-- Video Player -->
-                        <div class="row">
-
-                        </div>
-
-                        <!-- Music Suggestions -->
-                        <div class="row">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- side bar -->
-            <div class="col-md-2">
-                <!-- Current location button -->
-                <div class="row">
-
-                </div>
-
-                <!-- Input box and submit button -->
-                <div class="row">
-
-                </div>
-
-                <!-- Accordian -->
-                <div class="row">
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-
     <!-- lightning html -->
     <div class="storm"></div>
     <!-- end lightning html -->
@@ -182,72 +118,98 @@
         <div class="image02"></div>
     </div>
 
-    <!-- App Header & Current time -->
-    <div class='row appHeaderLeft'>
-        <h2 class='col' id='appHeader'>Weather Spot</h2>
-        <div>
-            <h4 class='col'><span id='currentDateTime'></span></h4>
-        </div>
-    </div>
-    <!-- Current Location, Youtube Player & Right Column Container -->
-    <div class='container-fluid'>
 
-        <div class='row'>
-            <!-- Current Location -->
-            <h1 class='col-md-9' id='currentLocationTitle'>Current Location: <span id='currentLocation'></span></h1>
-            <!-- YouTube Player -->
-            <div class='col-md-3 embed-container'>
-                <iframe id='youtubePlayer' width="280px" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
+    <!-- Main Skeleton -->
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Main screen -->
+            <div class="col-md-9">
+                <div class="row justify-content-between">
+                    <!-- Title, weather info -->
+                    <div class="col-md-5">
+                        <!-- Title -->
+                        <div class="row">
+                            <h2 id='appHeader'>Weather Spot</h2>
+                        </div>
+
+                        <!-- Location -->
+                        <div class="row mb-10">
+                            <h1 id='currentLocationTitle'>Current Location: <span id='currentLocation'></span></h1>
+                        </div>
+
+                        <!-- Weather data -->
+                        <div class="row m-0">
+                            <div class="card mainWeatherCard" style="max-width: 302px;">
+                                <!-- Heading -->
+                                <div class="card-body">
+                                    <h2 class="card-title"><span id='temperatureDiv'></span></h2>
+
+                                    <h6 class="card-subtitle"><span id='descriptionDiv'></span></h6>
+
+                                    <!-- Image -->
+                                    <div id='weatherIcon'></div>
+                                    <h6 class="card-subtitle"><span id='windSpeedDiv'></span></h6>
+                                    <h6 class="card-subtitle"><span id='humidityDiv'></span></h6>
+                                    <h6 class="card-subtitle"><span id='sunriseDiv'></span></h6>
+                                    <h6 class="card-subtitle"><span id='sunsetDiv'></span></h6>
+
+                                </div>
+                                <!-- Image -->
+                                <div id='weatherIcon'></div>
+                                <!-- Text Content -->
+                                <div class="card-body">
+                                    <p class="card-text"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Media column -->
+                    <div class="col-md-5">
+                        <!-- Time -->
+                        <div class="row">
+                            <h4><span id='currentDateTime'></span></h4>
+                        </div>
+
+                        <!-- Video Player -->
+                        <div class="row embed-container">
+                            <iframe id='youtubePlayer' width="280px"
+                                src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
+                        </div>
+
+                        <!-- Music Suggestions -->
+                        <div class="row embed-container" id="youtubeApp"></div>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <!-- Right Column -->
-        <div class='container-fluid'>
-            <div id='rightColumn'>
-                <div class="col-auto">
+            <!-- side bar -->
+            <div class="col-md-3" id="rightColumn">
+
+                <!-- Current location button -->
+                <div class="row">
                     <p>Allow this page to use your location <button id="buttonID"></button></p>
-                    <input class="form-control form-control-lg form-control-borderless location" type="search"
-                        placeholder="Enter City">
-                    <button class="btn btn-sm btn-success submit" type="submit">Search</button>
                 </div>
 
-                <!--Add Forecast Weather Accordion-->
-                <div class="accordion" id="accordionEx"></div>
-                <!--Completed Forecast Weather Accordion-->
-
-            </div>
-        </div>
-    </div>
-    <!-- Weather Details, Playlist details -->
-    <div class='container-fluid'>
-        <div class='row'>
-            <!-- Weather Card - Weather Details -->
-            <div class='col-md-9 container weatherDetails'>
-                <div class="card mainWeatherCard" style="max-width: 302px;">
-                    <!-- Heading -->
-                    <div class="card-body">
-                        <h2 class="card-title"><span id='temperatureDiv'></span></h2>
-
-                        <h6 class="card-subtitle"><span id='descriptionDiv'></span></h6>
-
-                        <!-- Image -->
-                        <div id='weatherIcon'></div>
-                        <h6 class="card-subtitle"><span id='windSpeedDiv'></span></h6>
-                        <h6 class="card-subtitle"><span id='humidityDiv'></span></h6>
-                        <h6 class="card-subtitle"><span id='sunriseDiv'></span></h6>
-                        <h6 class="card-subtitle"><span id='sunsetDiv'></span></h6>
-
+                <!-- Input box and submit button -->
+                <div class="row">
+                    <div class="col-md-9 mr-1">
+                        <input class="form-control form-control-lg form-control-borderless location" type="search"
+                            placeholder="Enter City">
                     </div>
-                    <!-- Image -->
-                    <div id='weatherIcon'></div>
-                    <!-- Text Content -->
-                    <div class="card-body">
-                        <p class="card-text"></p>
+                    <div class="col-md-3 mr-1">
+                        <button class="btn btn-sm btn-success submit" type="submit">Search</button>
                     </div>
                 </div>
+
+                <!-- Accordian -->
+                <div class="row justify-content-center">
+                    <!--Add Forecast Weather Accordion-->
+                    <div class="accordion" id="accordionEx"></div>
+                    <!--Completed Forecast Weather Accordion-->
+
+                </div>
             </div>
-            <!-- Youtube Playlist -->
-            <div class='col-md-3 embed-container' id='youtubeApp'></div>
         </div>
     </div>
 
