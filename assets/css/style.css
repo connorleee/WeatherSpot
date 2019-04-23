@@ -1,9 +1,9 @@
 #currentLocationTitle {
     /* border: 1px solid black; */
     /* padding-top: 20px; */
-    padding-left: 30px;
+    padding-left: 2rem;
     padding-bottom: 0;
-    line-height: 40px;
+    line-height: 3rem;
     font-family: 'Fjalla One', sans-serif;
     text-transform: uppercase;
     /* margin-top: 2%; */
@@ -16,19 +16,19 @@
     color: #fff;
     font-family: 'Fjalla One', sans-serif;
     text-transform: uppercase;
-    padding-right: 35px;
-    padding-top: 15px;
+    padding-right: 2rem;
+    padding-top: 1rem;
 }
 
 .col-auto {
-    padding-left:10px;
-    padding-right: 10px;
+    padding-left:.75rem;
+    padding-right: .75rem;
 }
 
 #buttonID {
     background: #30dd8a;
-    width: 15px;
-    height: 15px;
+    width: 1rem;
+    height: 1rem;
     border-radius: 20%
 }
 
@@ -51,8 +51,8 @@
     position: absolute;
     right: 0;
     top: 0;
-    padding-left: 5px;
-    padding-top: 20px;
+    padding-left: .5rem;
+    padding-top: 1.5rem;
 }
 .row {
     width: 82%;
@@ -69,9 +69,9 @@
 }
 #appHeader, #currentDateTime {
     width: 50%;
-    margin-left: 30px;
+    margin-left: 2rem;
     /* margin-top: 3%; */
-    font-size: 20px;
+    font-size: 1.5rem;
     overflow: auto;
     padding: 0;
     font-family: 'Fjalla One', sans-serif;
@@ -81,10 +81,10 @@
     /* border: 1px solid black; */
 }
 #currentDateTime {
-    padding-right: 40px;
+    padding-right: 2.5rem;
 }
 #appHeader {
-    margin-left: 50px;
+    margin-left: 3rem;
 }
 #youtubePlayer {
     padding: 0px;
@@ -102,18 +102,18 @@
 }
 
 .btn-hover, .submit {
-    width: 200px;
-    font-size: 16px;
+    width: 10rem;
+    font-size: 1rem;
     font-weight: 600;
     color: #fff;
     cursor: pointer;
-    margin: 5px;
-    height: 50px;
+    margin: .25rem;
+    height: 3rem;
     text-align:center;
     border: none;
     background-size: 300% 100%;
 
-    border-radius: 50px;
+    border-radius: 3rem;
     -moz-transition: all .4s ease-in-out;
     -o-transition: all .4s ease-in-out;
     -webkit-transition: all .4s ease-in-out;
@@ -141,14 +141,14 @@
 .playlistTitle{
     text-transform: capitalize;
     border: 1px solid #fff;
-    width: 230px;
+    width: 15rem;
     opacity: 0.8;
     font-family: 'Oswald', sans-serif;
 }
 .submit {
-    height: 40px;
-    width: 60px;
-    margin-top: 10px;
+    height: 2.25rem;
+    width: 4rem;
+    margin-top: .75rem;
     border-radius: 25%;
     margin-left: 0;
     border: 1px solid #fff;

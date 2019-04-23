@@ -105,7 +105,7 @@ var api = [{
             //retrieve main weather condition
             weatherMain = weather.weather[0].main.toLowerCase().trim();
             console.log(weatherMain);
-            
+
 
             var pWeatherMain = weatherMain;
 
@@ -154,7 +154,7 @@ var api = [{
                     $('.sun').hide();
                     $('.fog').hide();
                     $('.snowflakes').hide();
-                    $('#landing').hide();  
+                    $('#landing').hide();
                 } else if (weatherMain === "snow") {
                     $('.snowflakes').show();
                     $('.fog').hide();
@@ -309,12 +309,12 @@ var api = [{
                 displayWeatherForecastData(weatherForecast);
             })
 
-            // function showCityBackground() {
-            //     var elem = document.querySelector('#background');
-            //     elem.innerHTML = '<img class="background" src="assets/images/' + cityName + '.jpg" alt="' + cityName + '">'
+            function showCityBackground() {
+                var elem = document.querySelector('#background');
+                elem.innerHTML = '<img class="background" src="assets/images/' + cityName + '.jpg" alt="' + cityName + '">'
 
-            // }
-            // showCityBackground()
+            }
+            showCityBackground()
 
         }
 
