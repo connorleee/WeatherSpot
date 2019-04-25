@@ -1,6 +1,6 @@
 # WeatherSpot
 
-### [WeatherSpot](https://connorleee.github.io/project-1/) is a weather app that spices up your daily routine by suggesting music that relates to the mood that the current weather might induce. 
+### [WeatherSpot](https://connorleee.github.io/project-1/ "WeatherSpot Application") is a weather app that spices up your daily routine by suggesting music that relates to the mood that the current weather might induce. 
 
 #### WeatherSpot incorporates two API calls to generate the information shown on the DOM:
   1. OpenWeatherMap 
