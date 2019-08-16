@@ -18,6 +18,7 @@
     text-transform: uppercase;
     padding-right: 2rem;
     padding-top: 1rem;
+    display: block;
 }
 
 .col-auto {
@@ -480,8 +481,13 @@ div.card-body {
 }
 
 #vidList {
-    padding-right: 25px;
+    align-content: left;
 }
+
+.playlistTitle{
+    display: block;
+}
+
 /* fog css */
 body {
     overflow-x: hidden; 
